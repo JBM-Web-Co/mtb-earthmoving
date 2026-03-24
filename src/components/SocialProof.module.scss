@@ -1,0 +1,72 @@
+@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+.gallery {
+    @include section-padding;
+    background: $bg;
+
+    .inner {
+        @include container;
+    }
+}
+
+.intro {
+    font-family: $font-body;
+    font-size: 1rem;
+    color: $text-muted;
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include bp.above(tablet) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    @include bp.above(laptop) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.tile {
+    aspect-ratio: 4 / 3;
+    background: $surface;
+    border-radius: $radius-lg;
+    border: 2px dashed $border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: default;
+    transition:
+        border-color 0.2s,
+        background 0.2s;
+
+    &:hover {
+        border-color: rgba(55, 117, 190, 0.4);
+        background: var(--primary-light);
+    }
+}
+
+.tileIcon {
+    color: $text-muted;
+    opacity: 0.45;
+}
+
+.tileText {
+    font-family: $font-body;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: $text-muted;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.6;
+}

@@ -1,0 +1,176 @@
+﻿@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+/*  Buttons  */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: $radius;
+    font-weight: 600;
+    font-size: 1rem;
+    transition:
+        background 0.2s,
+        transform 0.15s,
+        box-shadow 0.2s;
+    min-height: 44px;
+
+    &:hover {
+        transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &:hover {
+            transform: none;
+        }
+    }
+
+    &.primary {
+        background: $primary;
+        color: $primary-fg;
+
+        &:hover {
+            background: $primary-hover;
+            box-shadow: 0 4px 16px rgba($primary, 0.3);
+        }
+    }
+
+    &.secondary {
+        background: transparent;
+        color: $primary;
+        border: 2px solid $primary;
+
+        &:hover {
+            background: $primary-light;
+        }
+    }
+
+    &.white {
+        background: $bg;
+        color: $primary;
+
+        &:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+/*  Section shared  */
+.sectionHeader {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
+}
+
+.sectionLabel {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $primary;
+    margin-bottom: 0.75rem;
+}
+
+.sectionTitle {
+    font-family: $font-heading;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    @include bp.above(tablet) {
+        font-size: 2.75rem;
+    }
+}
+
+.sectionSubtitle {
+    font-size: 1.05rem;
+    color: $text-muted;
+    line-height: 1.7;
+}
+
+/*  Animations  */
+.fadeUp {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.fadeUpVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*  Form Fields  */
+.formGroup {
+    margin-bottom: 1.25rem;
+}
+
+.formLabel {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $text;
+    margin-bottom: 0.4rem;
+}
+
+.formInput {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid $border;
+    border-radius: $radius;
+    font-size: 0.95rem;
+    color: $text;
+    background: $bg;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+    &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+        outline: none;
+    }
+}
+
+.formTextarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.formSelect {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a4a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.formInputError {
+    border-color: #e53e3e;
+
+    &:focus {
+        border-color: #e53e3e;
+        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+    }
+}
+
+.formError {
+    font-size: 0.8rem;
+    color: #e53e3e;
+    margin-top: 0.35rem;
+}

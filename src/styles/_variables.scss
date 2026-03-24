@@ -1,0 +1,45 @@
+@use 'breakpoints' as bp;
+
+// Static tokens (don't change with theme)
+$primary: #3775be;
+$primary-hover: #2d64a8;
+$primary-fg: #ffffff;
+$accent: #c17630;
+$accent-hover: #a6641f;
+$radius: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$font-heading: 'Oswald', sans-serif;
+$font-body: 'Source Sans 3', sans-serif;
+$container: 1200px;
+$header-height: 72px;
+
+// Theme-switching tokens (powered by CSS custom properties in global.scss)
+$bg: var(--bg);
+$surface: var(--surface);
+$text: var(--text);
+$text-muted: var(--text-muted);
+$text-light: var(--text-light);
+$border: var(--border);
+$border-light: var(--border-light);
+$primary-light: var(--primary-light);
+$nav-bg: var(--nav-bg);
+$shadow-sm: var(--shadow-sm);
+$shadow: var(--shadow);
+$shadow-lg: var(--shadow-lg);
+
+@mixin container {
+    max-width: $container;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    @include bp.above(tablet) {
+        padding: 0 3rem;
+    }
+}
+
+@mixin section-padding {
+    padding: 5rem 0;
+    @include bp.above(tablet) {
+        padding: 7rem 0;
+    }
+}

@@ -1,0 +1,171 @@
+@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+.contact {
+    @include section-padding;
+    background: $surface;
+
+    .inner {
+        @include container;
+    }
+}
+
+.phoneBlock {
+    max-width: 680px;
+    margin: 0 auto 3rem;
+}
+
+.phoneLink {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: $primary;
+    color: $primary-fg;
+    padding: 1.25rem 1.75rem;
+    border-radius: $radius-lg;
+    transition:
+        background 0.2s,
+        transform 0.18s,
+        box-shadow 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background: $primary-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(55, 117, 190, 0.35);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &:hover {
+            transform: none;
+        }
+    }
+}
+
+.phoneIconWrap {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.phoneText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.phoneLabel {
+    font-family: $font-body;
+    font-size: 0.82rem;
+    font-weight: 500;
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+}
+
+.phoneNumber {
+    font-family: $font-heading;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+
+    @include bp.above(tablet) {
+        font-size: 2rem;
+    }
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+
+    & > * {
+        width: 100%;
+    }
+
+    @include bp.above(tablet) {
+        & > * {
+            width: calc(50% - 1.5rem);
+            flex: 0 0 auto;
+        }
+    }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.infoTitle {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.infoText {
+    font-family: $font-body;
+    font-size: 0.95rem;
+    color: $text-muted;
+    line-height: 1.75;
+    margin-top: -0.75rem;
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.itemIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius;
+    background: $primary-light;
+    color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.itemLabel {
+    font-family: $font-body;
+    font-size: 0.78rem;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+}
+
+.itemValue {
+    font-family: $font-body;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: $text;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.formWrap {
+    background: $bg;
+    border: 1px solid $border;
+    border-radius: $radius-lg;
+    padding: 2rem;
+
+    @include bp.above(tablet) {
+        padding: 2.25rem;
+    }
+}

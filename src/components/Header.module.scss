@@ -1,0 +1,186 @@
+@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    height: $header-height;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        backdrop-filter 0.3s ease;
+
+    &.scrolled {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom-color: $border;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .inner {
+        @include container;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.logoImg {
+    height: 60px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.nav {
+    display: none;
+    align-items: center;
+    gap: 1.75rem;
+
+    @include bp.above(tablet) {
+        display: flex;
+    }
+
+    .link {
+        font-family: $font-body;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: $text-muted;
+        transition: color 0.2s;
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            color: $primary;
+        }
+    }
+
+    .cta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: $primary;
+        color: $primary-fg;
+        padding: 0.6rem 1.4rem;
+        border-radius: $radius;
+        font-family: $font-body;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition:
+            background 0.2s,
+            transform 0.15s,
+            box-shadow 0.2s;
+
+        &:hover {
+            background: $primary-hover;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(55, 117, 190, 0.35);
+        }
+    }
+}
+
+.mobileMenuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text;
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+
+    @include bp.above(tablet) {
+        display: none;
+    }
+}
+
+.mobileMenu {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 1px solid $border;
+    padding: 1.25rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 99;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    @include bp.above(tablet) {
+        display: none;
+    }
+}
+
+.mobileNavLink {
+    font-family: $font-body;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: $text;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid $border-light;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+// When header is transparent (at top of page, over dark hero)
+.header:not(.scrolled) .link {
+    color: rgba(255, 255, 255, 0.82);
+
+    &:hover,
+    &:focus-visible {
+        color: #ffffff;
+    }
+}
+
+.header:not(.scrolled) .mobileMenuBtn {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mobileNavCta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: $primary;
+    color: $primary-fg;
+    padding: 0.85rem;
+    border-radius: $radius;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+    cursor: pointer;
+    min-height: 48px;
+    transition: background 0.2s;
+
+    &:hover {
+        background: $primary-hover;
+    }
+}

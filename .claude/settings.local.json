@@ -1,0 +1,30 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(npm run typecheck)",
+            "Bash(npm run build)",
+            "Bash(npm install:*)",
+            "Bash(npx tsc:*)",
+            "Bash(npx react-router:*)",
+            "Bash(npm run:*)",
+            "Bash(npm show:*)",
+            "mcp__stitch__create_project",
+            "mcp__stitch__generate_screen_from_text",
+            "mcp__stitch__list_screens",
+            "mcp__stitch__generate_variants",
+            "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"web agency landing page professional conversion Australian service business left-aligned SaaS\" --design-system -p \"JBM Web Co\")",
+            "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"landing page hero gradient stat cards conversion animation\" --domain landing)",
+            "mcp__stitch__list_projects",
+            "mcp__stitch__edit_screens",
+            "mcp__stitch__get_screen",
+            "mcp__claude_ai_Airtable__search_bases",
+            "mcp__claude_ai_Airtable__list_bases",
+            "mcp__claude_ai_Airtable__list_tables_for_base",
+            "mcp__claude_ai_Airtable__list_records_for_table",
+            "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"construction earthmoving trade service landing page professional\" --design-system -p \"MTB Earthmoving\")",
+            "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"hero CTA service cards contact form\" --domain landing)",
+            "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"accessibility animation touch interaction\" --domain ux)",
+            "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"react vite component layout responsive\" --stack react)"
+        ]
+    }
+}

@@ -1,0 +1,77 @@
+@use 'sass:map';
+
+// ── Responsive Breakpoints (shared) ──
+// Import via: @use 'breakpoints' as bp;
+//
+// Usage:
+//   @include bp.above(tablet)  { ... }
+//   @include bp.below(tablet)  { ... }
+//   @include bp.only(tablet)   { ... }
+//   @include bp.between(tablet, desktop) { ... }
+
+$breakpoints: (
+    mobile: 0,
+    tablet: 800px,
+    laptop: 1024px,
+    desktop: 1440px,
+) !default;
+
+@function bp-value($name) {
+    @if map.has-key($breakpoints, $name) {
+        @return map.get($breakpoints, $name);
+    }
+    @error 'Breakpoint `#{$name}` not found in $breakpoints map.';
+}
+
+@function bp-next($name) {
+    $keys: map.keys($breakpoints);
+    $found: false;
+    @each $k in $keys {
+        @if $found == true {
+            @return $k;
+        }
+        @if $k == $name {
+            $found: true;
+        }
+    }
+    @return null;
+}
+
+@mixin above($name) {
+    $min: bp-value($name);
+    @if $min == 0 {
+        @content;
+    } @else {
+        @media (min-width: $min) {
+            @content;
+        }
+    }
+}
+
+@mixin below($name) {
+    $max: bp-value($name) - 1px;
+    @media (max-width: $max) {
+        @content;
+    }
+}
+
+@mixin only($name) {
+    $next: bp-next($name);
+    @if $next == null {
+        @include above($name) {
+            @content;
+        }
+    } @else {
+        @include between($name, $next) {
+            @content;
+        }
+    }
+}
+
+@mixin between($lower, $upper) {
+    $min: bp-value($lower);
+    $max: bp-value($upper) - 1px;
+    @media (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}

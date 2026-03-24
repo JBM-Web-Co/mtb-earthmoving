@@ -1,0 +1,74 @@
+@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+.services {
+    @include section-padding;
+    background: $bg;
+
+    .inner {
+        @include container;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+
+        @include bp.above(tablet) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @include bp.above(laptop) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .card {
+        background: $bg;
+        border: 1px solid $border;
+        border-top: 3px solid transparent;
+        border-radius: $radius-lg;
+        padding: 1.85rem;
+        cursor: default;
+        transition:
+            box-shadow 0.25s ease,
+            border-top-color 0.25s ease;
+
+        &:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-top-color: $primary;
+        }
+    }
+
+    .iconWrap {
+        width: 54px;
+        height: 54px;
+        border-radius: $radius;
+        background: $primary;
+        color: $primary-fg;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .title {
+        font-family: $font-heading;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: $text;
+        margin-bottom: 0.6rem;
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+
+    .desc {
+        font-family: $font-body;
+        font-size: 0.95rem;
+        color: $text-muted;
+        line-height: 1.7;
+    }
+}

@@ -1,0 +1,40 @@
+﻿@use '../styles/variables' as *;
+@use '../styles/breakpoints' as bp;
+
+.stickyCta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    padding: 0.75rem 1.5rem;
+    background: $nav-bg;
+    backdrop-filter: blur(8px);
+    border-top: 1px solid $border;
+    transition:
+        background 0.3s,
+        border-color 0.3s;
+
+    @include bp.above(tablet) {
+        display: none;
+    }
+
+    .btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: $primary;
+        color: $primary-fg;
+        padding: 0.85rem;
+        border-radius: $radius;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: background 0.2s;
+
+        &:hover {
+            background: $primary-hover;
+        }
+    }
+}
