@@ -212,36 +212,6 @@
     }
 }
 
-
-.scrollIndicator {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(240, 237, 232, 0.25);
-    border-radius: 50%;
-    color: rgba(240, 237, 232, 0.6);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-    animation: scrollBounce 2s ease-in-out infinite;
-    margin-top: 1rem;
-
-    &:hover {
-        border-color: rgba(240, 237, 232, 0.6);
-        color: #f0ede8;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        animation: none;
-    }
-}
-
-@keyframes scrollBounce {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(5px); }
-}
-
 .statsStrip {
     position: relative;
     z-index: 2;
