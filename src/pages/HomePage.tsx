@@ -51,8 +51,8 @@ export default function HomePage() {
     return (
         <>
             <Hero />
-            <Services />
             <Benefits />
+            <Services />
             <SocialProof />
             <Contact />
         </>

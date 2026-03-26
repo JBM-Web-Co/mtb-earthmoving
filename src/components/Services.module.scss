@@ -3,7 +3,7 @@
 
 .services {
     @include section-padding;
-    background: $bg;
+    background: $surface;
 
     .inner {
         @include container;
@@ -25,19 +25,18 @@
     }
 
     .card {
-        background: $bg;
-        border: 1px solid $border;
-        border-top: 3px solid transparent;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.07);
         border-radius: $radius-lg;
         padding: 1.85rem;
         cursor: default;
         transition:
             box-shadow 0.25s ease,
-            border-top-color 0.25s ease;
+            border-color 0.25s ease;
 
         &:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            border-top-color: $primary;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+            border-color: rgba(55, 117, 190, 0.2);
         }
     }
 
@@ -45,8 +44,8 @@
         width: 54px;
         height: 54px;
         border-radius: $radius;
-        background: $primary;
-        color: $primary-fg;
+        background: rgba(55, 117, 190, 0.1);
+        color: $primary;
         display: flex;
         align-items: center;
         justify-content: center;

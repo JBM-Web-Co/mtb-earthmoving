@@ -2,6 +2,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Phone, ArrowRight, MapPin } from 'lucide-react';
 import s from './Hero.module.scss';
 
+const STATS = [
+    { num: '10+', label: 'Years Experience' },
+    { num: 'Free', label: 'Quotes & Advice' },
+    { num: '8+', label: 'Service Areas' },
+    { num: '100%', label: 'Owner-Operated' },
+];
+
 export default function Hero() {
     const reducedMotion = useReducedMotion();
     const anim = (delay: number) =>
@@ -15,8 +22,6 @@ export default function Hero() {
 
     return (
         <section className={s.hero}>
-            <div className={s.noiseOverlay} aria-hidden="true" />
-            <div className={s.diagonalLines} aria-hidden="true" />
             <div className={s.blueGlow} aria-hidden="true" />
 
             <div className={s.inner}>
@@ -26,7 +31,7 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.h1 className={s.headline} {...anim(0.1)}>
-                    This Land Is
+                    The Land Is
                     <br />
                     <span className={s.accentLine}>Our Office.</span>
                 </motion.h1>
@@ -51,19 +56,28 @@ export default function Hero() {
 
                 <motion.div className={s.trustLine} {...anim(0.4)}>
                     <span className={s.trustDot} aria-hidden="true" />
-                    Owner-operated
+                    10+ Years Experience
                     <span className={s.sep} aria-hidden="true">
                         ·
                     </span>
-                    Rural specialists
+                    Family Owned
                     <span className={s.sep} aria-hidden="true">
                         ·
                     </span>
-                    Locally based
+                    Free Quotes
                 </motion.div>
             </div>
 
-            <div className={s.bottomEdge} aria-hidden="true" />
+            <div className={s.statsStrip}>
+                <div className={s.statsInner}>
+                    {STATS.map((stat) => (
+                        <div key={stat.label} className={s.stat}>
+                            <span className={s.statNum}>{stat.num}</span>
+                            <span className={s.statLabel}>{stat.label}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </section>
     );
 }

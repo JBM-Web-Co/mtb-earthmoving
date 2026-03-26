@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Mail, Clock } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
 import type { ContactFormData, ContactFormErrors } from '../types';
@@ -112,6 +112,18 @@ export default function Contact() {
                                 >
                                     {businessData.email}
                                 </a>
+                            </div>
+                        </div>
+
+                        <div className={s.item}>
+                            <div className={s.itemIcon}>
+                                <Clock size={18} />
+                            </div>
+                            <div>
+                                <div className={s.itemLabel}>Hours</div>
+                                <span className={s.itemValue}>
+                                    {businessData.hours}
+                                </span>
                             </div>
                         </div>
                     </div>

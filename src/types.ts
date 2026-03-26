@@ -13,6 +13,7 @@ export type Service = {
     title: string;
     description: string;
     iconName: string;
+    image?: string;
 };
 
 export type Testimonial = {

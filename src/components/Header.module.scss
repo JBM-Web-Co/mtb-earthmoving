@@ -79,18 +79,16 @@
         padding: 0.6rem 1.4rem;
         border-radius: $radius;
         font-family: $font-body;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 0.95rem;
         cursor: pointer;
         transition:
             background 0.2s,
-            transform 0.15s,
             box-shadow 0.2s;
 
         &:hover {
             background: $primary-hover;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(55, 117, 190, 0.35);
+            box-shadow: 0 2px 10px rgba(55, 117, 190, 0.25);
         }
     }
 }
@@ -167,8 +165,8 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: $primary;
-    color: $primary-fg;
+    background: $accent;
+    color: $accent-fg;
     padding: 0.85rem;
     border-radius: $radius;
     font-family: $font-body;
@@ -181,6 +179,6 @@
     transition: background 0.2s;
 
     &:hover {
-        background: $primary-hover;
+        background: $accent-hover;
     }
 }

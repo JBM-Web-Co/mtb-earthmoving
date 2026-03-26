@@ -64,6 +64,22 @@
     max-width: 340px;
 }
 
+.social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: $accent;
+    transition: color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        color: $accent-hover;
+    }
+}
+
 .colTitle {
     font-family: $font-heading;
     font-size: 0.85rem;

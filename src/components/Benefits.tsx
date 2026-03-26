@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { MapPin, Award, Layers, ShieldCheck } from 'lucide-react';
+import { Award, Layers, Users, MessageCircle } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { businessData } from '../data';
 import { SectionHeader } from './UI';
@@ -7,10 +7,10 @@ import { useScrollReveal } from '../hooks';
 import s from './Benefits.module.scss';
 
 const iconMap: Record<string, ReactNode> = {
-    'map-pin': <MapPin size={22} />,
     award: <Award size={22} />,
+    users: <Users size={22} />,
+    'message-circle': <MessageCircle size={22} />,
     layers: <Layers size={22} />,
-    shield: <ShieldCheck size={22} />,
 };
 
 export default function Benefits() {
@@ -18,11 +18,11 @@ export default function Benefits() {
     const reducedMotion = useReducedMotion();
 
     return (
-        <section id="benefits" className={s.benefits}>
+        <section id="about" className={s.benefits}>
             <div className={s.inner}>
                 <SectionHeader
-                    label="Why Choose Us"
-                    title="Why Choose MTB Earthmoving"
+                    label="About Us"
+                    title="About MTB Earthmoving"
                     subtitle="Local knowledge, owner-operator attention, and a full service range — all in one crew."
                 />
                 <div ref={ref} className={s.grid}>

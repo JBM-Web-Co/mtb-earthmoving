@@ -5,7 +5,8 @@
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     overflow: hidden;
     background-image: url('/hero.png');
     background-size: cover;
@@ -27,37 +28,25 @@
     }
 }
 
-.noiseOverlay {
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 300px 300px;
-    opacity: 0.045;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.diagonalLines {
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-        -52deg,
-        transparent,
-        transparent 72px,
-        rgba(55, 117, 190, 0.04) 72px,
-        rgba(55, 117, 190, 0.04) 73px
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
 .blueGlow {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 70% 55% at 18% 40%, rgba(55, 117, 190, 0.22) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 30% at 85% 70%, rgba(55, 117, 190, 0.08) 0%, transparent 55%);
+        radial-gradient(
+            ellipse 70% 55% at 18% 40%,
+            rgba(55, 117, 190, 0.22) 0%,
+            transparent 65%
+        ),
+        radial-gradient(
+            ellipse 35% 28% at 88% 25%,
+            rgba(234, 179, 8, 0.1) 0%,
+            transparent 55%
+        ),
+        radial-gradient(
+            ellipse 40% 30% at 85% 75%,
+            rgba(55, 117, 190, 0.06) 0%,
+            transparent 55%
+        );
     pointer-events: none;
     z-index: 1;
 }
@@ -66,12 +55,16 @@
     @include container;
     position: relative;
     z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding-top: calc($header-height + 3rem);
-    padding-bottom: 6rem;
+    padding-bottom: 3rem;
 
     @include bp.above(tablet) {
         padding-top: calc($header-height + 4.5rem);
-        padding-bottom: 7rem;
+        padding-bottom: 4rem;
     }
 }
 
@@ -90,6 +83,7 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    width: max-content;
 }
 
 .headline {
@@ -150,7 +144,7 @@
     align-items: center;
     gap: 0.5rem;
     background: $primary;
-    color: #ffffff;
+    color: $primary-fg;
     padding: 0.9rem 1.85rem;
     border-radius: $radius;
     font-family: $font-body;
@@ -166,7 +160,7 @@
     &:hover {
         background: $primary-hover;
         transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(55, 117, 190, 0.45);
+        box-shadow: 0 4px 16px rgba(55, 117, 190, 0.35);
     }
 
     &:focus-visible {
@@ -224,7 +218,7 @@
     gap: 0.6rem;
     font-family: $font-body;
     font-size: 0.82rem;
-    color: #5e5e56;
+    color: rgba(240, 237, 232, 0.55);
     font-weight: 500;
     flex-wrap: wrap;
 }
@@ -233,25 +227,72 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: $primary;
-    opacity: 0.65;
+    background: $accent;
+    opacity: 0.8;
     flex-shrink: 0;
 }
 
 .sep {
-    color: #434340;
+    color: rgba(240, 237, 232, 0.3);
 }
 
-.bottomEdge {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 64px;
-    background: linear-gradient(to bottom right, transparent 49.9%, var(--bg) 50%);
-    z-index: 3;
+.statsStrip {
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 13, 16, 0.65);
+    border-top: 1px solid rgba(55, 117, 190, 0.25);
+    backdrop-filter: blur(8px);
+    padding: 1.75rem 0;
+}
+
+.statsInner {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
 
     @include bp.above(tablet) {
-        height: 80px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
     }
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-align: center;
+    position: relative;
+
+    @include bp.above(tablet) {
+        &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 36px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+    }
+}
+
+.statNum {
+    font-family: $font-heading;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: $accent;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.statLabel {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
 }

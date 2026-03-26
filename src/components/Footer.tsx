@@ -1,4 +1,4 @@
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Mail, Clock, Facebook } from 'lucide-react';
 import { businessData } from '../data';
 import s from './Footer.module.scss';
 
@@ -19,6 +19,16 @@ export default function Footer() {
                             Serving Gunnedah NSW &amp; Surrounds
                         </p>
                         <p className={s.desc}>{businessData.description}</p>
+                        <a
+                            href="https://www.facebook.com/MTBEarthmoving"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={s.social}
+                            aria-label="MTB Earthmoving on Facebook"
+                        >
+                            <Facebook size={18} />
+                            <span>MTB Earthmoving</span>
+                        </a>
                     </div>
 
                     <div>
@@ -53,6 +63,10 @@ export default function Footer() {
                                 <Mail size={16} className={s.contactIcon} />
                                 {businessData.email}
                             </a>
+                            <div className={s.contactItem}>
+                                <Clock size={16} className={s.contactIcon} />
+                                <span>{businessData.hours}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

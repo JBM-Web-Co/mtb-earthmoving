@@ -94,6 +94,19 @@
     line-height: 1.7;
 }
 
+/* Dark section header overrides */
+.sectionLabelDark {
+    color: $accent;
+}
+
+.sectionTitleDark {
+    color: #f0ede8;
+}
+
+.sectionSubtitleDark {
+    color: rgba(240, 237, 232, 0.6);
+}
+
 /*  Animations  */
 .fadeUp {
     opacity: 0;
