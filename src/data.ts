@@ -13,8 +13,8 @@ export const businessData: BusinessData = {
     postcode: '2380',
     hours: 'Mon–Sat: 6am – 6pm',
     navItems: [
-        { label: 'Services', href: '#services' },
         { label: 'About', href: '#about' },
+        { label: 'Services', href: '#services' },
         { label: 'Gallery', href: '#gallery' },
         { label: 'Contact', href: '#contact' },
     ],

@@ -40,7 +40,6 @@ export default function Hero() {
                     Professional earthmoving, road construction, and civil works
                     across Gunnedah and North West NSW.
                     <br className={s.breakDesktop} />
-                    Owner-operated. Built for the bush.
                 </motion.p>
 
                 <motion.div className={s.ctas} {...anim(0.3)}>
@@ -52,19 +51,6 @@ export default function Hero() {
                         Get a Quote
                         <ArrowRight size={18} />
                     </a>
-                </motion.div>
-
-                <motion.div className={s.trustLine} {...anim(0.4)}>
-                    <span className={s.trustDot} aria-hidden="true" />
-                    10+ Years Experience
-                    <span className={s.sep} aria-hidden="true">
-                        ·
-                    </span>
-                    Family Owned
-                    <span className={s.sep} aria-hidden="true">
-                        ·
-                    </span>
-                    Free Quotes
                 </motion.div>
             </div>
 

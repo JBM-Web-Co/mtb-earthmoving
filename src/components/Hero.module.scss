@@ -212,29 +212,6 @@
     }
 }
 
-.trustLine {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: $font-body;
-    font-size: 0.82rem;
-    color: rgba(240, 237, 232, 0.55);
-    font-weight: 500;
-    flex-wrap: wrap;
-}
-
-.trustDot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: $accent;
-    opacity: 0.8;
-    flex-shrink: 0;
-}
-
-.sep {
-    color: rgba(240, 237, 232, 0.3);
-}
 
 .statsStrip {
     position: relative;
