@@ -1,73 +1,232 @@
 @use '../styles/variables' as *;
 @use '../styles/breakpoints' as bp;
 
+// ── Section shell ───────────────────────────────────────────────────────────
+
 .services {
+    position: relative;
     @include section-padding;
-    background: $surface;
+    background: #0e1117;
+    overflow: hidden;
+}
 
-    .inner {
-        @include container;
+// Atmospheric blue glow bleeding in from the top
+.bgGlow {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            ellipse 100% 50% at 50% -8%,
+            rgba(55, 117, 190, 0.2) 0%,
+            transparent 65%
+        ),
+        radial-gradient(
+            ellipse 40% 30% at 92% 95%,
+            rgba(55, 117, 190, 0.07) 0%,
+            transparent 55%
+        );
+    pointer-events: none;
+}
+
+// Subtle diagonal-line texture — industrial grid-paper feel
+.bgTexture {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 42px,
+        rgba(255, 255, 255, 0.014) 42px,
+        rgba(255, 255, 255, 0.014) 43px
+    );
+    pointer-events: none;
+}
+
+// ── Layout ──────────────────────────────────────────────────────────────────
+
+.inner {
+    @include container;
+    position: relative;
+    z-index: 1;
+}
+
+// ── Grid — gap-as-rule technique ─────────────────────────────────────────────
+// The grid background colour bleeds through the 1px gaps, creating hairline
+// dividers between cards without any extra markup.
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: $radius-xl;
+    overflow: hidden;
+
+    @include bp.above(tablet) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
+    @include bp.above(laptop) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
-        @include bp.above(tablet) {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+// ── Card ─────────────────────────────────────────────────────────────────────
+
+.card {
+    position: relative;
+    background: #0e1117;
+    padding: 2.25rem;
+    overflow: hidden;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: rgba(55, 117, 190, 0.07);
+
+        .cardNumber {
+            opacity: 0.13;
+            transform: translateY(-8px) scale(1.04);
         }
 
-        @include bp.above(laptop) {
-            grid-template-columns: repeat(3, 1fr);
+        .iconWrap {
+            color: $accent;
+            transform: translateY(-3px);
+        }
+
+        .cardAccent {
+            transform: scaleX(1);
         }
     }
 
-    .card {
-        background: #ffffff;
-        border: 1px solid rgba(0, 0, 0, 0.07);
-        border-radius: $radius-lg;
-        padding: 1.85rem;
-        cursor: default;
-        transition:
-            box-shadow 0.25s ease,
-            border-color 0.25s ease;
+    @media (prefers-reduced-motion: reduce) {
+        &:hover .cardNumber,
+        &:hover .iconWrap {
+            transform: none;
+        }
+    }
+}
 
-        &:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
-            border-color: rgba(55, 117, 190, 0.2);
+// Last card spans the full grid width on tablet+ with a horizontal layout
+.cardLast {
+    @include bp.above(tablet) {
+        grid-column: 1 / -1;
+
+        .cardBody {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 2.5rem;
+            max-width: 720px;
+        }
+
+        .iconWrap {
+            flex-shrink: 0;
+            margin-bottom: 0;
+            margin-top: 0.2rem;
+        }
+
+        .cardNumber {
+            font-size: 9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.04;
+        }
+
+        &:hover .cardNumber {
+            opacity: 0.12;
+            transform: translateY(calc(-50% - 6px)) scale(1.03);
         }
     }
 
-    .iconWrap {
-        width: 54px;
-        height: 54px;
-        border-radius: $radius;
-        background: rgba(55, 117, 190, 0.1);
-        color: $primary;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.25rem;
-        flex-shrink: 0;
+    @media (prefers-reduced-motion: reduce) {
+        &:hover .cardNumber {
+            transform: translateY(-50%);
+        }
     }
+}
 
-    .title {
-        font-family: $font-heading;
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: $text;
-        margin-bottom: 0.6rem;
-        line-height: 1.25;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
+// ── Card number watermark ─────────────────────────────────────────────────────
+
+.cardNumber {
+    position: absolute;
+    top: 0.75rem;
+    right: 1.5rem;
+    font-family: $font-heading;
+    font-size: 6rem;
+    font-weight: 700;
+    color: #ffffff;
+    opacity: 0.05;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    user-select: none;
+    pointer-events: none;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: opacity 0.35s ease;
     }
+}
 
-    .desc {
-        font-family: $font-body;
-        font-size: 0.95rem;
-        color: $text-muted;
-        line-height: 1.7;
+// ── Card internals ────────────────────────────────────────────────────────────
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.iconWrap {
+    color: $primary;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: color 0.25s ease;
+    }
+}
+
+.cardContent {
+    flex: 1;
+}
+
+.cardTitle {
+    font-family: $font-heading;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f0ede8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+
+.cardDesc {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: rgba(240, 237, 232, 0.47);
+    line-height: 1.75;
+}
+
+// ── Bottom accent bar — slides in from left on hover ──────────────────────────
+
+.cardAccent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $primary 0%, $accent 100%);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    @media (prefers-reduced-motion: reduce) {
+        display: none;
     }
 }
