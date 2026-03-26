@@ -63,10 +63,33 @@
         color: $text-muted;
         transition: color 0.2s;
         cursor: pointer;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: $primary;
+            border-radius: 1px;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
 
         &:hover,
         &:focus-visible {
             color: $primary;
+        }
+    }
+
+    .linkActive {
+        color: $primary;
+        font-weight: 600;
+
+        &::after {
+            transform: scaleX(1);
         }
     }
 
@@ -154,6 +177,14 @@
     &:focus-visible {
         color: #ffffff;
     }
+
+    &::after {
+        background: #ffffff;
+    }
+}
+
+.header:not(.scrolled) .linkActive {
+    color: #ffffff;
 }
 
 .header:not(.scrolled) .mobileMenuBtn {
@@ -165,8 +196,8 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: $accent;
-    color: $accent-fg;
+    background: $primary;
+    color: $primary-fg;
     padding: 0.85rem;
     border-radius: $radius;
     font-family: $font-body;
@@ -176,9 +207,10 @@
     margin-top: 1rem;
     cursor: pointer;
     min-height: 48px;
-    transition: background 0.2s;
+    transition: background 0.2s, box-shadow 0.2s;
 
     &:hover {
-        background: $accent-hover;
+        background: $primary-hover;
+        box-shadow: 0 2px 10px rgba(55, 117, 190, 0.25);
     }
 }

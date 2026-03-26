@@ -76,6 +76,7 @@ type FormFieldProps = {
     placeholder?: string;
     required?: boolean;
     options?: string[];
+    autoComplete?: string;
 };
 
 export function FormField({
@@ -88,6 +89,7 @@ export function FormField({
     placeholder,
     required,
     options = [],
+    autoComplete,
 }: FormFieldProps) {
     const inputCls =
         `${s.formInput} ${error ? s.formInputError : ''} ${type === 'textarea' ? s.formTextarea : ''} ${type === 'select' ? s.formSelect : ''}`.trim();
@@ -140,6 +142,7 @@ export function FormField({
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
                     required={required}
+                    autoComplete={autoComplete}
                     aria-describedby={error ? errorId : undefined}
                     aria-invalid={!!error}
                 />

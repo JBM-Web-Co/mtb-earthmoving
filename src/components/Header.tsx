@@ -7,12 +7,29 @@ import s from './Header.module.scss';
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('');
     const reducedMotion = useReducedMotion();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    useEffect(() => {
+        const sections = document.querySelectorAll('section[id]');
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '0px 0px -60% 0px', threshold: 0 }
+        );
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
     }, []);
 
     const closeMenu = () => setMenuOpen(false);
@@ -33,11 +50,18 @@ export default function Header() {
                 </a>
 
                 <nav className={s.nav} aria-label="Main navigation">
-                    {businessData.navItems.map((item) => (
-                        <a key={item.href} href={item.href} className={s.link}>
-                            {item.label}
-                        </a>
-                    ))}
+                    {businessData.navItems.map((item) => {
+                        const sectionId = item.href.replace('#', '');
+                        return (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                className={`${s.link} ${activeSection === sectionId ? s.linkActive : ''}`}
+                            >
+                                {item.label}
+                            </a>
+                        );
+                    })}
                     <a href="tel:+61461522409" className={s.cta}>
                         <Phone size={16} />
                         Call Now

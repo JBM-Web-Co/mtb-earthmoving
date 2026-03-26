@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Phone, Mail, Clock } from 'lucide-react';
+import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
 import type { ContactFormData, ContactFormErrors } from '../types';
@@ -32,6 +32,7 @@ export default function Contact() {
         message: '',
     });
     const [errors, setErrors] = useState<ContactFormErrors>({});
+    const [submitted, setSubmitted] = useState(false);
 
     const update = (field: keyof ContactFormData) => (value: string) => {
         setForm((prev) => ({ ...prev, [field]: value }));
@@ -53,6 +54,8 @@ export default function Contact() {
             `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.serviceSelect || 'Not specified'}\n\nMessage:\n${form.message || 'No message provided'}`
         );
         window.location.href = `mailto:michealbrattan1994@yahoo.com?subject=${subject}&body=${body}`;
+        setSubmitted(true);
+        setForm({ name: '', email: '', phone: '', serviceSelect: '', message: '' });
     };
 
     return (
@@ -121,7 +124,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <div className={s.itemLabel}>Hours</div>
-                                <span className={s.itemValue}>
+                                <span className={s.itemValueStatic}>
                                     {businessData.hours}
                                 </span>
                             </div>
@@ -129,6 +132,22 @@ export default function Contact() {
                     </div>
 
                     <div className={s.formWrap}>
+                        {submitted ? (
+                            <div className={s.successPanel}>
+                                <CheckCircle2 size={44} className={s.successIcon} aria-hidden="true" />
+                                <h3 className={s.successTitle}>Message Sent!</h3>
+                                <p className={s.successText}>
+                                    Thanks for reaching out. Your email client should have opened — we'll get back to you shortly.
+                                </p>
+                                <button
+                                    type="button"
+                                    className={s.successReset}
+                                    onClick={() => setSubmitted(false)}
+                                >
+                                    Send another message
+                                </button>
+                            </div>
+                        ) : (
                         <form onSubmit={handleSubmit} noValidate>
                             <FormField
                                 label="Full Name"
@@ -137,6 +156,7 @@ export default function Contact() {
                                 error={errors.name}
                                 onChange={update('name')}
                                 placeholder="Your full name"
+                                autoComplete="name"
                                 required
                             />
                             <FormField
@@ -147,6 +167,7 @@ export default function Contact() {
                                 error={errors.phone}
                                 onChange={update('phone')}
                                 placeholder="04XX XXX XXX"
+                                autoComplete="tel"
                                 required
                             />
                             <FormField
@@ -157,6 +178,7 @@ export default function Contact() {
                                 error={errors.email}
                                 onChange={update('email')}
                                 placeholder="you@example.com"
+                                autoComplete="email"
                                 required
                             />
                             <FormField
@@ -177,6 +199,7 @@ export default function Contact() {
                             />
                             <Button type="submit">Send Message</Button>
                         </form>
+                        )}
                     </div>
                 </div>
             </div>

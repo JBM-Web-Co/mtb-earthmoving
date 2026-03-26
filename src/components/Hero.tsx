@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { Phone, ArrowRight, MapPin } from 'lucide-react';
+import { Phone, ArrowRight, MapPin, ChevronDown } from 'lucide-react';
 import s from './Hero.module.scss';
 
 const STATS = [
@@ -48,10 +48,19 @@ export default function Hero() {
                         Call +61 461 522 409
                     </a>
                     <a href="#contact" className={s.ctaSecondary}>
-                        Get a Quote
+                        Get a Free Quote
                         <ArrowRight size={18} />
                     </a>
                 </motion.div>
+
+                <motion.a
+                    href="#about"
+                    className={s.scrollIndicator}
+                    aria-label="Scroll to learn more"
+                    {...anim(0.5)}
+                >
+                    <ChevronDown size={22} />
+                </motion.a>
             </div>
 
             <div className={s.statsStrip}>

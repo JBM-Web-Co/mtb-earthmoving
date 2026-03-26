@@ -2,7 +2,7 @@
 @use '../styles/breakpoints' as bp;
 
 .benefits {
-    background: #ffffff;
+    background: $bg;
 }
 
 .inner {
@@ -94,7 +94,7 @@
 }
 
 .image {
-    width: auto;
+    width: 100%;
     height: 450px;
     border-radius: $radius-lg;
     display: block;
