@@ -28,7 +28,8 @@
       "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"earthmoving construction heavy machinery rural industrial service\" --design-system -p \"MTB Earthmoving\")",
       "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"animation accessibility loading states\" --domain ux)",
       "Bash(python skills/ui-ux-pro-max/scripts/search.py \"earthmoving construction rural services professional\" --design-system -p \"MTB Earthmoving\")",
-      "Bash(python \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"earthmoving construction rural services professional\" --design-system -p \"MTB Earthmoving\")"
+      "Bash(python \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"earthmoving construction rural services professional\" --design-system -p \"MTB Earthmoving\")",
+      "WebSearch"
     ]
   }
 }

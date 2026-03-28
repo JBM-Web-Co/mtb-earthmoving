@@ -3,66 +3,55 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionHeader } from './UI';
 import s from './SocialProof.module.scss';
 
-type GalleryImage = { src: string; alt: string };
-
-const IMAGES: GalleryImage[] = [
-    { src: '/work1.png', alt: 'MTB Earthmoving project — site work' },
-    { src: '/work2.png', alt: 'MTB Earthmoving project — earthworks' },
-    { src: '/work3.png', alt: 'MTB Earthmoving project — land clearing' },
-    { src: '/work4.png', alt: 'MTB Earthmoving project — road construction' },
-    { src: '/work5.png', alt: 'MTB Earthmoving project — drainage' },
-    { src: '/work6.png', alt: 'MTB Earthmoving project — dam work' },
+const IMAGES = [
+    { src: '/work1.png', alt: 'MTB Earthmoving — Recent Project' },
+    { src: '/work2.png', alt: 'MTB Earthmoving — Recent Project' },
+    { src: '/work3.png', alt: 'MTB Earthmoving — Recent Project' },
+    { src: '/work4.png', alt: 'MTB Earthmoving — Recent Project' },
+    { src: '/work5.png', alt: 'MTB Earthmoving — Recent Project' },
+    { src: '/work6.png', alt: 'MTB Earthmoving — Recent Project' },
 ];
 
-// 2 copies for seamless infinite loop
-const ALL_TILES = Array.from({ length: IMAGES.length * 2 }, (_, i) => i);
-
-const SPEED_DESKTOP = 0.45;
-const SPEED_MOBILE = 0.28;
-
 export default function Gallery() {
-    const innerRef = useRef<HTMLDivElement>(null);
-    const posRef = useRef(0);
-    const isPausedRef = useRef(false);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const isPaused = useRef(false);
+    const resumeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const [lightbox, setLightbox] = useState<number | null>(null);
 
+    // Auto-scroll: increment scrollLeft each frame, loop back at end
     useEffect(() => {
-        const inner = innerRef.current;
-        if (!inner) return;
+        const el = trackRef.current;
+        if (!el) return;
 
         let animId: number;
-
         const step = () => {
-            if (!isPausedRef.current) {
-                const speed =
-                    window.innerWidth >= 768 ? SPEED_DESKTOP : SPEED_MOBILE;
-                posRef.current -= speed;
-
-                const halfWidth = inner.scrollWidth / 2;
-
-                if (posRef.current <= -halfWidth) posRef.current += halfWidth;
-                if (posRef.current > 0) posRef.current -= halfWidth;
-
-                inner.style.transform = `translateX(${posRef.current}px)`;
+            if (!isPaused.current) {
+                el.scrollLeft += 1;
+                // When we reach the halfway point (end of first copy), jump back seamlessly
+                if (el.scrollLeft >= el.scrollWidth / 2) {
+                    el.scrollLeft -= el.scrollWidth / 2;
+                }
             }
             animId = requestAnimationFrame(step);
         };
-
         animId = requestAnimationFrame(step);
         return () => cancelAnimationFrame(animId);
     }, []);
 
-    const pause = () => { isPausedRef.current = true; };
-    const resume = () => { isPausedRef.current = false; };
+    const pause = () => {
+        clearTimeout(resumeTimer.current);
+        isPaused.current = true;
+    };
 
-    const openLightbox = (index: number) => {
-        setLightbox(index);
-        isPausedRef.current = true;
+    // delay gives touch momentum time to finish before resuming
+    const resume = (delay = 0) => {
+        clearTimeout(resumeTimer.current);
+        resumeTimer.current = setTimeout(() => { isPaused.current = false; }, delay);
     };
 
     const closeLightbox = useCallback(() => {
         setLightbox(null);
-        isPausedRef.current = false;
+        resume();
     }, []);
 
     const prev = useCallback(() => {
@@ -90,42 +79,31 @@ export default function Gallery() {
                 <SectionHeader label="Our Work" title="Recent Projects" />
             </div>
 
-            <div className={s.trackWrapper}>
-                <div
-                    className={s.trackOuter}
-                    onMouseEnter={pause}
-                    onMouseLeave={resume}
-                    onTouchStart={pause}
-                    onTouchEnd={resume}
-                >
-                    <div ref={innerRef} className={s.scrollTrack}>
-                        {ALL_TILES.map((_, i) => {
-                            const idx = i % IMAGES.length;
-                            const img = IMAGES[idx];
-                            const isDupe = i >= IMAGES.length;
-                            return (
-                                <div
-                                    key={i}
-                                    className={s.tile}
-                                    aria-hidden={isDupe}
-                                    onClick={isDupe ? undefined : () => openLightbox(idx)}
-                                    role={isDupe ? undefined : 'button'}
-                                    tabIndex={isDupe ? -1 : 0}
-                                    aria-label={isDupe ? undefined : `View ${img.alt}`}
-                                    onKeyDown={isDupe ? undefined : (e) => e.key === 'Enter' && openLightbox(idx)}
-                                >
-                                    <img
-                                        src={img.src}
-                                        alt={isDupe ? '' : img.alt}
-                                        className={s.tileImg}
-                                        draggable={false}
-                                        loading="lazy"
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+            <div
+                ref={trackRef}
+                className={s.track}
+                onMouseEnter={pause}
+                onMouseLeave={() => resume()}
+                onTouchStart={pause}
+                onTouchEnd={() => resume(800)}
+            >
+                {/* Two copies — second is aria-hidden, used only for the seamless loop illusion */}
+                {[false, true].flatMap((isDupe) =>
+                    IMAGES.map((img, i) => (
+                        <div
+                            key={`${isDupe ? 'b' : 'a'}-${i}`}
+                            className={s.tile}
+                            aria-hidden={isDupe || undefined}
+                            role={isDupe ? undefined : 'button'}
+                            tabIndex={isDupe ? -1 : 0}
+                            aria-label={isDupe ? undefined : `View ${img.alt}`}
+                            onClick={isDupe ? undefined : () => { setLightbox(i); pause(); }}
+                            onKeyDown={isDupe ? undefined : (e) => e.key === 'Enter' && setLightbox(i)}
+                        >
+                            <img src={img.src} alt={isDupe ? '' : img.alt} className={s.tileImg} draggable={false} loading="lazy" />
+                        </div>
+                    ))
+                )}
             </div>
 
             {lightbox !== null && (
@@ -136,11 +114,7 @@ export default function Gallery() {
                     aria-modal="true"
                     aria-label="Image lightbox"
                 >
-                    <button
-                        className={s.lightboxClose}
-                        onClick={closeLightbox}
-                        aria-label="Close lightbox"
-                    >
+                    <button className={s.lightboxClose} onClick={closeLightbox} aria-label="Close lightbox">
                         <X size={22} />
                     </button>
 
@@ -153,12 +127,7 @@ export default function Gallery() {
                     </button>
 
                     <div className={s.lightboxImgWrap} onClick={(e) => e.stopPropagation()}>
-                        <img
-                            src={IMAGES[lightbox].src}
-                            alt={IMAGES[lightbox].alt}
-                            className={s.lightboxImg}
-                        />
-                        <p className={s.lightboxCaption}>{IMAGES[lightbox].alt}</p>
+                        <img src={IMAGES[lightbox].src} alt={IMAGES[lightbox].alt} className={s.lightboxImg} />
                     </div>
 
                     <button

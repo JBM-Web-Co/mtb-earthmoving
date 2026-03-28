@@ -10,31 +10,21 @@
     }
 }
 
-
-.trackWrapper {
+.track {
     display: flex;
-    flex-direction: column;
     gap: 1.25rem;
-}
-
-// Clips the scrolling inner track
-.trackOuter {
-    width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    padding: 0.25rem 1rem 0.5rem;
     cursor: grab;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     &:active {
         cursor: grabbing;
     }
-}
-
-// The actual moving strip — width is determined by tiles, transform animates it
-.scrollTrack {
-    display: flex;
-    gap: 1.25rem;
-    width: max-content;
-    padding: 0.25rem 1rem 0.5rem;
-    will-change: transform;
 
     @include bp.above(tablet) {
         gap: 1.5rem;
@@ -47,7 +37,6 @@
     height: 210px;
     border-radius: $radius-lg;
     overflow: hidden;
-    flex-shrink: 0;
     cursor: pointer;
 
     @include bp.above(tablet) {
@@ -144,26 +133,15 @@
 .lightboxNext { right: 1rem; }
 
 .lightboxImgWrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
     max-width: min(90vw, 1100px);
     max-height: 90vh;
 }
 
 .lightboxImg {
     max-width: 100%;
-    max-height: calc(90vh - 3rem);
+    max-height: 90vh;
     border-radius: $radius-lg;
     object-fit: contain;
     display: block;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-}
-
-.lightboxCaption {
-    font-family: $font-body;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.55);
-    text-align: center;
 }
