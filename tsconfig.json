@@ -17,5 +17,5 @@
         "noFallthroughCasesInSwitch": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["src", "react-router.config.ts"]
+    "include": ["src", "scripts", "react-router.config.ts"]
 }

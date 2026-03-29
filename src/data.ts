@@ -1,4 +1,29 @@
-import type { BusinessData } from './types';
+type NavItem = {
+    label: string;
+    href: string;
+};
+
+type Service = {
+    title: string;
+    description: string;
+    iconName: string;
+};
+
+export type BusinessData = {
+    name: string;
+    tagline: string;
+    description: string;
+    phone: string;
+    email: string;
+    address: string;
+    city: string;
+    state: string;
+    postcode: string;
+    hours: string;
+    navItems: NavItem[];
+    services: Service[];
+    areas: string[];
+};
 
 export const businessData: BusinessData = {
     name: 'MTB Earthmoving',
@@ -17,32 +42,6 @@ export const businessData: BusinessData = {
         { label: 'Services', href: '#services' },
         { label: 'Gallery', href: '#gallery' },
         { label: 'Contact', href: '#contact' },
-    ],
-    benefits: [
-        {
-            title: '10+ Years Experience',
-            description:
-                'Over a decade of hands-on earthmoving across New England NSW — we know the land, the conditions, and how to get results the first time.',
-            iconName: 'award',
-        },
-        {
-            title: 'Local Family Business',
-            description:
-                'MTB Earthmoving is a local, family-run operation. You deal directly with the owner every time — no middlemen, no surprises.',
-            iconName: 'users',
-        },
-        {
-            title: 'Free Quotes & Advice',
-            description:
-                "Not sure where to start? We offer free quotes and practical advice on every job — big or small, give us a call and we'll help you figure it out.",
-            iconName: 'message-circle',
-        },
-        {
-            title: 'Full Service Range',
-            description:
-                "From earthmoving to drainage, dam construction to welding — one crew handles it all so you don't have to call around.",
-            iconName: 'layers',
-        },
     ],
     services: [
         {

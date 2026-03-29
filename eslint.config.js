@@ -13,6 +13,7 @@ export default [
             'vite.config.ts',
             '.react-router/**',
             'build/**',
+            'api/_src/emails/*.js', // Compiled emails
         ],
     },
     {

@@ -2,9 +2,17 @@ import { useState } from 'react';
 import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
-import type { ContactFormData, ContactFormErrors } from '../types';
 import s from './Contact.module.scss';
 import { track } from '@vercel/analytics';
+
+type ContactFormData = {
+    name: string;
+    email: string;
+    phone: string;
+    serviceSelect: string;
+    message: string;
+};
+type ContactFormErrors = Partial<Record<keyof ContactFormData, string>>;
 
 const EMPTY_FORM: ContactFormData = {
     name: '',
