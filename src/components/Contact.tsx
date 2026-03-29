@@ -1,9 +1,10 @@
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
 import type { ContactFormData, ContactFormErrors } from '../types';
 import s from './Contact.module.scss';
+import { track } from '@vercel/analytics';
 
 const EMPTY_FORM: ContactFormData = {
     name: '',
@@ -42,7 +43,8 @@ export default function Contact() {
             setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+        track('Form Submitted', { source: 'homepage' });
         e.preventDefault();
         const errs = validateForm(form);
         if (Object.keys(errs).length > 0) {

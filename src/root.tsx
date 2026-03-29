@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import StickyCTA from './components/StickyCTA';
 import './styles/global.scss';
+import { Analytics } from '@vercel/analytics/react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -48,6 +49,7 @@ export default function App() {
             </main>
             <Footer />
             <StickyCTA />
+            <Analytics />
         </>
     );
 }
