@@ -54,13 +54,30 @@ type SectionHeaderProps = {
     dark?: boolean;
 };
 
-export function SectionHeader({ label, title, subtitle, dark = false }: SectionHeaderProps) {
+export function SectionHeader({
+    label,
+    title,
+    subtitle,
+    dark = false,
+}: SectionHeaderProps) {
     return (
         <div className={s.sectionHeader}>
-            <span className={`${s.sectionLabel}${dark ? ` ${s.sectionLabelDark}` : ''}`}>{label}</span>
-            <h2 className={`${s.sectionTitle}${dark ? ` ${s.sectionTitleDark}` : ''}`}>{title}</h2>
+            <span
+                className={`${s.sectionLabel}${dark ? ` ${s.sectionLabelDark}` : ''}`}
+            >
+                {label}
+            </span>
+            <h2
+                className={`${s.sectionTitle}${dark ? ` ${s.sectionTitleDark}` : ''}`}
+            >
+                {title}
+            </h2>
             {subtitle && (
-                <p className={`${s.sectionSubtitle}${dark ? ` ${s.sectionSubtitleDark}` : ''}`}>{subtitle}</p>
+                <p
+                    className={`${s.sectionSubtitle}${dark ? ` ${s.sectionSubtitleDark}` : ''}`}
+                >
+                    {subtitle}
+                </p>
             )}
         </div>
     );

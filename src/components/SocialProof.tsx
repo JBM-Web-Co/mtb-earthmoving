@@ -15,7 +15,9 @@ const IMAGES = [
 export default function Gallery() {
     const trackRef = useRef<HTMLDivElement>(null);
     const isPaused = useRef(false);
-    const resumeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+    const resumeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+        undefined
+    );
     const [lightbox, setLightbox] = useState<number | null>(null);
 
     // Auto-scroll: increment scrollLeft each frame, loop back at end
@@ -46,7 +48,9 @@ export default function Gallery() {
     // delay gives touch momentum time to finish before resuming
     const resume = (delay = 0) => {
         clearTimeout(resumeTimer.current);
-        resumeTimer.current = setTimeout(() => { isPaused.current = false; }, delay);
+        resumeTimer.current = setTimeout(() => {
+            isPaused.current = false;
+        }, delay);
     };
 
     const closeLightbox = useCallback(() => {
@@ -55,7 +59,9 @@ export default function Gallery() {
     }, []);
 
     const prev = useCallback(() => {
-        setLightbox((i) => (i === null ? null : (i - 1 + IMAGES.length) % IMAGES.length));
+        setLightbox((i) =>
+            i === null ? null : (i - 1 + IMAGES.length) % IMAGES.length
+        );
     }, []);
 
     const next = useCallback(() => {
@@ -97,10 +103,27 @@ export default function Gallery() {
                             role={isDupe ? undefined : 'button'}
                             tabIndex={isDupe ? -1 : 0}
                             aria-label={isDupe ? undefined : `View ${img.alt}`}
-                            onClick={isDupe ? undefined : () => { setLightbox(i); pause(); }}
-                            onKeyDown={isDupe ? undefined : (e) => e.key === 'Enter' && setLightbox(i)}
+                            onClick={
+                                isDupe
+                                    ? undefined
+                                    : () => {
+                                          setLightbox(i);
+                                          pause();
+                                      }
+                            }
+                            onKeyDown={
+                                isDupe
+                                    ? undefined
+                                    : (e) => e.key === 'Enter' && setLightbox(i)
+                            }
                         >
-                            <img src={img.src} alt={isDupe ? '' : img.alt} className={s.tileImg} draggable={false} loading="lazy" />
+                            <img
+                                src={img.src}
+                                alt={isDupe ? '' : img.alt}
+                                className={s.tileImg}
+                                draggable={false}
+                                loading="lazy"
+                            />
                         </div>
                     ))
                 )}
@@ -114,25 +137,42 @@ export default function Gallery() {
                     aria-modal="true"
                     aria-label="Image lightbox"
                 >
-                    <button className={s.lightboxClose} onClick={closeLightbox} aria-label="Close lightbox">
+                    <button
+                        className={s.lightboxClose}
+                        onClick={closeLightbox}
+                        aria-label="Close lightbox"
+                    >
                         <X size={22} />
                     </button>
 
                     <button
                         className={`${s.lightboxNav} ${s.lightboxPrev}`}
-                        onClick={(e) => { e.stopPropagation(); prev(); }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            prev();
+                        }}
                         aria-label="Previous image"
                     >
                         <ChevronLeft size={28} />
                     </button>
 
-                    <div className={s.lightboxImgWrap} onClick={(e) => e.stopPropagation()}>
-                        <img src={IMAGES[lightbox].src} alt={IMAGES[lightbox].alt} className={s.lightboxImg} />
+                    <div
+                        className={s.lightboxImgWrap}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src={IMAGES[lightbox].src}
+                            alt={IMAGES[lightbox].alt}
+                            className={s.lightboxImg}
+                        />
                     </div>
 
                     <button
                         className={`${s.lightboxNav} ${s.lightboxNext}`}
-                        onClick={(e) => { e.stopPropagation(); next(); }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            next();
+                        }}
                         aria-label="Next image"
                     >
                         <ChevronRight size={28} />

@@ -22,9 +22,7 @@ export const ContactSchema = z.object({
         .trim()
         .min(1, 'Phone is required')
         .max(40, 'Phone is too long'),
-    serviceSelect: z
-        .enum(SERVICE_OPTIONS)
-        .optional(),
+    serviceSelect: z.enum(SERVICE_OPTIONS).optional(),
     message: z.string().trim().max(5000, 'Message is too long').optional(),
 });
 export type ContactSchema = z.infer<typeof ContactSchema>;

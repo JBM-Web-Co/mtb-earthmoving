@@ -31,11 +31,12 @@ export default function Benefits() {
                         transition={{ duration: 0.5 }}
                     >
                         <p className={s.body}>
-                            <span className={s.brandName}>MTB Earthmoving</span> is a local, family-run business
-                            serving New England NSW and surrounds. We've been
-                            working this land for over a decade, so we
-                            understand the conditions, the terrain, and what it
-                            takes to get the job done right the first time.
+                            <span className={s.brandName}>MTB Earthmoving</span>{' '}
+                            is a local, family-run business serving New England
+                            NSW and surrounds. We've been working this land for
+                            over a decade, so we understand the conditions, the
+                            terrain, and what it takes to get the job done right
+                            the first time.
                         </p>
                         <p className={s.body}>
                             Every quote is free, every job gets the owner
