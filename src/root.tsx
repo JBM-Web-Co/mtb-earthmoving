@@ -15,6 +15,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <link rel="icon" href="/logo.png" type="image/png" />
+                <link rel="apple-touch-icon" href="/logo.png" />
+                <meta name="theme-color" content="#1a1a1a" />
+                <meta name="geo.region" content="AU-NSW" />
+                <meta name="geo.placename" content="Gunnedah" />
+                <meta name="geo.position" content="-30.9776;150.2576" />
+                <meta name="ICBM" content="-30.9776, 150.2576" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
                     rel="preconnect"
