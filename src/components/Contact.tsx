@@ -3,9 +3,16 @@ import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
 import type { ContactFormData, ContactFormErrors } from '../types';
+import { SERVICE_OPTIONS } from '../../api/_src/utils/contactSchema';
 import s from './Contact.module.scss';
 
-const SERVICE_OPTIONS = businessData.services.map((s) => s.title);
+const EMPTY_FORM: ContactFormData = {
+    name: '',
+    email: '',
+    phone: '',
+    serviceSelect: '',
+    message: '',
+};
 
 function validateForm(data: ContactFormData): ContactFormErrors {
     const errors: ContactFormErrors = {};
@@ -24,15 +31,11 @@ function validateForm(data: ContactFormData): ContactFormErrors {
 }
 
 export default function Contact() {
-    const [form, setForm] = useState<ContactFormData>({
-        name: '',
-        email: '',
-        phone: '',
-        serviceSelect: '',
-        message: '',
-    });
+    const [form, setForm] = useState<ContactFormData>(EMPTY_FORM);
     const [errors, setErrors] = useState<ContactFormErrors>({});
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const update = (field: keyof ContactFormData) => (value: string) => {
         setForm((prev) => ({ ...prev, [field]: value }));
@@ -40,22 +43,44 @@ export default function Contact() {
             setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const errs = validateForm(form);
         if (Object.keys(errs).length > 0) {
             setErrors(errs);
             return;
         }
-        const subject = encodeURIComponent(
-            `Enquiry from ${form.name} — MTB Earthmoving`
-        );
-        const body = encodeURIComponent(
-            `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.serviceSelect || 'Not specified'}\n\nMessage:\n${form.message || 'No message provided'}`
-        );
-        window.location.href = `mailto:michealbrattan1994@yahoo.com?subject=${subject}&body=${body}`;
-        setSubmitted(true);
-        setForm({ name: '', email: '', phone: '', serviceSelect: '', message: '' });
+
+        setLoading(true);
+        setSubmitError(null);
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+
+            if (!res.ok) {
+                const json = (await res.json().catch(() => ({}))) as {
+                    error?: string;
+                };
+                throw new Error(
+                    json.error ?? 'Something went wrong. Please try again.'
+                );
+            }
+
+            setSubmitted(true);
+            setForm(EMPTY_FORM);
+        } catch (err) {
+            setSubmitError(
+                err instanceof Error
+                    ? err.message
+                    : 'Something went wrong. Please try again.'
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -137,7 +162,7 @@ export default function Contact() {
                                 <CheckCircle2 size={44} className={s.successIcon} aria-hidden="true" />
                                 <h3 className={s.successTitle}>Message Sent!</h3>
                                 <p className={s.successText}>
-                                    Thanks for reaching out. Your email client should have opened — we'll get back to you shortly.
+                                    Thanks for reaching out. We'll be in touch shortly.
                                 </p>
                                 <button
                                     type="button"
@@ -197,7 +222,12 @@ export default function Contact() {
                                 onChange={update('message')}
                                 placeholder="Tell us about your project — location, scope, timeline..."
                             />
-                            <Button type="submit">Send Message</Button>
+                            {submitError && (
+                                <p className={s.submitError}>{submitError}</p>
+                            )}
+                            <Button type="submit" disabled={loading}>
+                                {loading ? 'Sending…' : 'Send Message'}
+                            </Button>
                         </form>
                         )}
                     </div>

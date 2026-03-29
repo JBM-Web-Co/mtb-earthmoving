@@ -20,7 +20,7 @@ export default [
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
-                project: './tsconfig.json',
+                project: ['./tsconfig.json', './api/tsconfig.json'],
                 tsconfigRootDir: import.meta.dirname,
             },
             globals: {

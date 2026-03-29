@@ -29,7 +29,12 @@
       "Bash(python3 \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"animation accessibility loading states\" --domain ux)",
       "Bash(python skills/ui-ux-pro-max/scripts/search.py \"earthmoving construction rural services professional\" --design-system -p \"MTB Earthmoving\")",
       "Bash(python \"C:/Users/jakew/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"earthmoving construction rural services professional\" --design-system -p \"MTB Earthmoving\")",
-      "WebSearch"
+      "WebSearch",
+      "mcp__claude_ai_Vercel__search_vercel_documentation",
+      "WebFetch(domain:community.vercel.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:t3.gg)",
+      "WebFetch(domain:vercel.com)"
     ]
   }
 }

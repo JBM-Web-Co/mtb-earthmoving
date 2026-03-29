@@ -1,14 +1,15 @@
 {
-    "name": "MTB-Earthmoving",
+    "name": "mtb-earthmoving",
     "private": true,
     "version": "1.0.0",
     "type": "module",
     "scripts": {
-        "dev": "react-router dev --port 5173",
-        "build": "tsc && react-router build",
+        "vercel-dev": "vercel dev",
+        "build": "npm run typecheck && npm run buildEmails && react-router build",
         "lint": "eslint .",
-        "typecheck": "tsc --noEmit",
-        "style": "npx prettier --write '**/*.{js,ts,tsx,json}'"
+        "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p api/tsconfig.json",
+        "style": "npx prettier --write '**/*.{js,ts,tsx,json}'",
+        "buildEmails": "tsx scripts/buildEmails.ts"
     },
     "prettier": {
         "semi": true,
@@ -17,18 +18,25 @@
         "trailingComma": "es5"
     },
     "dependencies": {
+        "@react-email/components": "^1.0.8",
+        "@react-router/node": "^7.13.1",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
-        "@react-router/node": "^7.13.1",
         "react-router-dom": "^7.13.1",
         "isbot": "^5",
         "framer-motion": "^12.34.0",
-        "lucide-react": "^0.577.0"
+        "lucide-react": "^0.577.0",
+        "react-email": "^5.2.9",
+        "resend": "^6.9.3",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
+        "@react-email/preview-server": "^5.2.9",
         "@react-router/dev": "^7.13.1",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
+        "@types/node": "^25.4.0",
+        "@vercel/node": "^5.6.12",
         "eslint": "^9.17.0",
         "eslint-plugin-react": "^7.37.2",
         "eslint-plugin-react-hooks": "^7.0.1",

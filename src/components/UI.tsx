@@ -75,7 +75,7 @@ type FormFieldProps = {
     onChange: (value: string) => void;
     placeholder?: string;
     required?: boolean;
-    options?: string[];
+    options?: readonly string[];
     autoComplete?: string;
 };
 

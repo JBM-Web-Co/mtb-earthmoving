@@ -2,3 +2,9 @@
 /node_modules
 /build
 /.react-router
+.env
+.env.local
+.vercel
+.env*.local
+api/_src/emails/*.js
+.vscode/

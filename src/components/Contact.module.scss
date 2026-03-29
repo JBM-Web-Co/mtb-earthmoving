@@ -207,6 +207,13 @@
     max-width: 340px;
 }
 
+.submitError {
+    font-family: $font-body;
+    font-size: 0.88rem;
+    color: #dc2626;
+    margin-bottom: 0.75rem;
+}
+
 .successReset {
     margin-top: 0.5rem;
     font-family: $font-body;
