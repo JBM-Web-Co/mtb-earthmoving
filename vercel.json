@@ -1,4 +1,5 @@
 {
     "framework": null,
+    "outputDirectory": "build/client",
     "devCommand": "npx vite --port $PORT"
 }
