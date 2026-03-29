@@ -13,7 +13,6 @@ export type Service = {
     title: string;
     description: string;
     iconName: string;
-    image?: string;
 };
 
 export type Testimonial = {
@@ -52,9 +51,5 @@ export type BusinessData = {
     navItems: NavItem[];
     benefits: Benefit[];
     services: Service[];
-    testimonials: Testimonial[];
-    faqs: FAQItem[];
-    rating: number;
-    reviewCount: number;
     areas: string[];
 };

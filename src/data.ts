@@ -2,7 +2,7 @@ import type { BusinessData } from './types';
 
 export const businessData: BusinessData = {
     name: 'MTB Earthmoving',
-    tagline: 'Built for the Land. Ready for the Job.',
+    tagline: 'The land is our office.',
     description:
         'Professional rural earthmoving, road construction, and civil works across Gunnedah NSW and the North West. Owner-operated, locally based, built for the bush.',
     phone: '+61 461 522 409',
@@ -50,55 +50,44 @@ export const businessData: BusinessData = {
             description:
                 'Land clearing, bulk earthworks, and site preparation for rural properties across Gunnedah and the North West.',
             iconName: 'mountain',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Site Preparation — House & Shed Pads',
             description:
                 'Precision levelling and compaction for house slabs, shed pads, and hardstand areas built to last.',
             iconName: 'home',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Road Construction & Gravelling',
             description:
                 'New farm and station roads built to handle heavy traffic — with proper grading, shaping, and drainage design.',
             iconName: 'route',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Drainage Solutions',
             description:
                 'Cut-off drains, table drains, and subsurface drainage systems designed to protect your land and infrastructure.',
             iconName: 'droplets',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Dam Construction & De-silting',
             description:
                 'New farm dam construction and existing dam de-silting to restore water storage capacity on your property.',
             iconName: 'waves',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Road Maintenance & Repair',
             description:
                 'Ongoing road grading, pothole repair, and surface restoration to keep your access tracks in safe working order.',
             iconName: 'wrench',
-            image: '/hero.png', // replace with actual service photo
         },
         {
             title: 'Welding, Fabrication & Machinery Repair',
             description:
                 'On-site welding, custom steel fabrication, and machinery repair to keep your equipment moving and your site running.',
             iconName: 'hammer',
-            image: '/hero.png', // replace with actual service photo
         },
     ],
-    testimonials: [],
-    faqs: [],
-    rating: 5.0,
-    reviewCount: 0,
     areas: [
         'Gunnedah',
         'Narrabri',
