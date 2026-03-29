@@ -3,7 +3,6 @@ import { Phone, Mail, Clock, CheckCircle2 } from 'lucide-react';
 import { businessData } from '../data';
 import { Button, FormField, SectionHeader } from './UI';
 import type { ContactFormData, ContactFormErrors } from '../types';
-import { SERVICE_OPTIONS } from '../../api/_src/utils/contactSchema';
 import s from './Contact.module.scss';
 
 const EMPTY_FORM: ContactFormData = {
@@ -159,10 +158,17 @@ export default function Contact() {
                     <div className={s.formWrap}>
                         {submitted ? (
                             <div className={s.successPanel}>
-                                <CheckCircle2 size={44} className={s.successIcon} aria-hidden="true" />
-                                <h3 className={s.successTitle}>Message Sent!</h3>
+                                <CheckCircle2
+                                    size={44}
+                                    className={s.successIcon}
+                                    aria-hidden="true"
+                                />
+                                <h3 className={s.successTitle}>
+                                    Message Sent!
+                                </h3>
                                 <p className={s.successText}>
-                                    Thanks for reaching out. We'll be in touch shortly.
+                                    Thanks for reaching out. We'll be in touch
+                                    shortly.
                                 </p>
                                 <button
                                     type="button"
@@ -173,62 +179,66 @@ export default function Contact() {
                                 </button>
                             </div>
                         ) : (
-                        <form onSubmit={handleSubmit} noValidate>
-                            <FormField
-                                label="Full Name"
-                                name="name"
-                                value={form.name}
-                                error={errors.name}
-                                onChange={update('name')}
-                                placeholder="Your full name"
-                                autoComplete="name"
-                                required
-                            />
-                            <FormField
-                                label="Phone Number"
-                                name="phone"
-                                type="tel"
-                                value={form.phone}
-                                error={errors.phone}
-                                onChange={update('phone')}
-                                placeholder="04XX XXX XXX"
-                                autoComplete="tel"
-                                required
-                            />
-                            <FormField
-                                label="Email Address"
-                                name="email"
-                                type="email"
-                                value={form.email}
-                                error={errors.email}
-                                onChange={update('email')}
-                                placeholder="you@example.com"
-                                autoComplete="email"
-                                required
-                            />
-                            <FormField
-                                label="Service Required"
-                                name="serviceSelect"
-                                type="select"
-                                value={form.serviceSelect}
-                                onChange={update('serviceSelect')}
-                                options={SERVICE_OPTIONS}
-                            />
-                            <FormField
-                                label="Message / Project Details"
-                                name="message"
-                                type="textarea"
-                                value={form.message}
-                                onChange={update('message')}
-                                placeholder="Tell us about your project — location, scope, timeline..."
-                            />
-                            {submitError && (
-                                <p className={s.submitError}>{submitError}</p>
-                            )}
-                            <Button type="submit" disabled={loading}>
-                                {loading ? 'Sending…' : 'Send Message'}
-                            </Button>
-                        </form>
+                            <form onSubmit={handleSubmit} noValidate>
+                                <FormField
+                                    label="Full Name"
+                                    name="name"
+                                    value={form.name}
+                                    error={errors.name}
+                                    onChange={update('name')}
+                                    placeholder="Your full name"
+                                    autoComplete="name"
+                                    required
+                                />
+                                <FormField
+                                    label="Phone Number"
+                                    name="phone"
+                                    type="tel"
+                                    value={form.phone}
+                                    error={errors.phone}
+                                    onChange={update('phone')}
+                                    placeholder="04XX XXX XXX"
+                                    autoComplete="tel"
+                                    required
+                                />
+                                <FormField
+                                    label="Email Address"
+                                    name="email"
+                                    type="email"
+                                    value={form.email}
+                                    error={errors.email}
+                                    onChange={update('email')}
+                                    placeholder="you@example.com"
+                                    autoComplete="email"
+                                    required
+                                />
+                                <FormField
+                                    label="Service Required"
+                                    name="serviceSelect"
+                                    type="select"
+                                    value={form.serviceSelect}
+                                    onChange={update('serviceSelect')}
+                                    options={businessData.services.map(
+                                        (svc) => svc.title
+                                    )}
+                                />
+                                <FormField
+                                    label="Message / Project Details"
+                                    name="message"
+                                    type="textarea"
+                                    value={form.message}
+                                    onChange={update('message')}
+                                    placeholder="Tell us about your project — location, scope, timeline..."
+                                />
+                                {submitError && (
+                                    <p className={s.submitError}>
+                                        {submitError}
+                                    </p>
+                                )}
+                                <Button type="submit" disabled={loading}>
+                                    {loading ? 'Sending…' : 'Send Message'}
+                                </Button>
+                            </form>
                         )}
                     </div>
                 </div>
