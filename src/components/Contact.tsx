@@ -60,23 +60,12 @@ export default function Contact() {
                 body: JSON.stringify(form),
             });
 
-            if (!res.ok) {
-                const json = (await res.json().catch(() => ({}))) as {
-                    error?: string;
-                };
-                throw new Error(
-                    json.error ?? 'Something went wrong. Please try again.'
-                );
-            }
+            if (!res.ok) throw new Error();
 
             setSubmitted(true);
             setForm(EMPTY_FORM);
-        } catch (err) {
-            setSubmitError(
-                err instanceof Error
-                    ? err.message
-                    : 'Something went wrong. Please try again.'
-            );
+        } catch {
+            setSubmitError('Something went wrong. Please try again later.');
         } finally {
             setLoading(false);
         }
@@ -170,13 +159,6 @@ export default function Contact() {
                                     Thanks for reaching out. We'll be in touch
                                     shortly.
                                 </p>
-                                <button
-                                    type="button"
-                                    className={s.successReset}
-                                    onClick={() => setSubmitted(false)}
-                                >
-                                    Send another message
-                                </button>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} noValidate>
