@@ -207,7 +207,9 @@
     margin-top: 1rem;
     cursor: pointer;
     min-height: 48px;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
 
     &:hover {
         background: $primary-hover;

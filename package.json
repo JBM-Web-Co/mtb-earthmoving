@@ -8,7 +8,7 @@
         "build": "npm run typecheck && npm run buildEmails && react-router build",
         "lint": "eslint .",
         "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p api/tsconfig.json",
-        "style": "npx prettier --write '**/*.{js,ts,tsx,json}'",
+        "style": "npx prettier --write '**/*.{js,ts,tsx,json,scss}'",
         "buildEmails": "tsx scripts/buildEmails.ts"
     },
     "prettier": {
