@@ -1,0 +1,88 @@
+name: Deploy
+
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: Deployment target
+                required: true
+                type: choice
+                options:
+                    - preview
+                    - production
+
+jobs:
+    style:
+        name: JBM-Web / Style
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: JBM-Web/package-lock.json
+            - name: Install
+              run: npm ci
+              working-directory: JBM-Web
+            - name: Prettier check
+              run: npx prettier --check "**/*.{js,ts,tsx,json}"
+              working-directory: JBM-Web
+
+    typecheck:
+        name: JBM-Web / Typecheck
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: JBM-Web/package-lock.json
+            - name: Install
+              run: npm ci
+              working-directory: JBM-Web
+            - name: Typecheck (frontend)
+              run: npm run typecheck
+              working-directory: JBM-Web
+            - name: Typecheck (API)
+              run: npm run api-typecheck
+              working-directory: JBM-Web
+
+    lint:
+        name: JBM-Web / Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: JBM-Web/package-lock.json
+            - name: Install
+              run: npm ci
+              working-directory: JBM-Web
+            - name: ESLint
+              run: npm run lint
+              working-directory: JBM-Web
+
+    # ── Deploy ─────────────────────────────────────────────────────────────────
+
+    deploy:
+        name: Deploy to Vercel
+        needs:
+            - style
+            - typecheck
+            - lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Deploy to Vercel
+              run: |
+                  npx vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+                  npx vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+                  npx vercel deploy --prebuilt ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+              env:
+                  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+                  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
