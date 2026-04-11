@@ -11,6 +11,9 @@ on:
                     - preview
                     - production
 
+permissions:
+    contents: read
+
 jobs:
     checks:
         uses: ./.github/workflows/checks.yml
