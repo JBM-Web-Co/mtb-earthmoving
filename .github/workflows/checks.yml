@@ -20,7 +20,9 @@ jobs:
             - name: Install
               run: npm ci
             - name: Prettier check
-              run: npm run style
+              run: |
+                  npm run style
+                  git diff --exit-code
 
     typecheck:
         name: Typecheck
