@@ -38,7 +38,11 @@ jobs:
                   cache: 'npm'
                   cache-dependency-path: package-lock.json
             - name: Install
-              run: npm ci
+              run: npm install
+
+            - name: Check lockfile is up to date
+              run: git diff --exit-code package-lock.json
+
             - name: Typecheck
               run: npm run typecheck
 
