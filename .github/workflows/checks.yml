@@ -1,0 +1,58 @@
+name: Checks
+
+on:
+    pull_request:
+        branches:
+            - main
+    workflow_call:
+
+permissions:
+    contents: read
+
+jobs:
+    style:
+        name: Style
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: package-lock.json
+            - name: Install
+              run: npm ci
+            - name: Prettier check
+              run: |
+                  npm run style
+                  git diff --exit-code
+
+    typecheck:
+        name: Typecheck
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: package-lock.json
+            - name: Install
+              run: npm ci
+            - name: Typecheck
+              run: npm run typecheck
+
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '24.x'
+                  cache: 'npm'
+                  cache-dependency-path: package-lock.json
+            - name: Install
+              run: npm ci
+            - name: ESLint
+              run: npm run lint
