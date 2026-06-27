@@ -9,7 +9,7 @@ import {
     Text,
     Heading,
     Hr,
-} from '@react-email/components';
+} from 'react-email';
 import type { ContactSchema } from '../utils/contactSchema.js';
 
 const FONT_FAMILY =

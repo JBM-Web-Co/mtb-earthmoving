@@ -34,7 +34,8 @@
             "WebFetch(domain:community.vercel.com)",
             "WebFetch(domain:github.com)",
             "WebFetch(domain:t3.gg)",
-            "WebFetch(domain:vercel.com)"
+            "WebFetch(domain:vercel.com)",
+            "Bash(npm outdated *)"
         ]
     }
 }
