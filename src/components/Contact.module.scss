@@ -187,7 +187,7 @@
 }
 
 .successIcon {
-    color: #16a34a;
+    color: $success;
 }
 
 .successTitle {
@@ -210,21 +210,15 @@
 .submitError {
     font-family: $font-body;
     font-size: 0.88rem;
-    color: #dc2626;
+    color: $danger;
     margin-bottom: 0.75rem;
 }
 
-.successReset {
-    margin-top: 0.5rem;
-    font-family: $font-body;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: $primary;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: color 0.2s;
-
-    &:hover {
-        color: $primary-hover;
-    }
+// Honeypot — visually removed from the page but still in the DOM for bots.
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }

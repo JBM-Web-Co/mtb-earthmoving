@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Phone, ArrowRight, MapPin } from 'lucide-react';
+import { businessData } from '../data';
 import s from './Hero.module.scss';
 
 const STATS = [
@@ -10,10 +11,13 @@ const STATS = [
 ];
 
 export default function Hero() {
-    const reducedMotion = useReducedMotion();
+    const reduced_motion = useReducedMotion();
+    // When reduced motion is on, render directly in the visible state. The page
+    // is prerendered with `opacity: 0` baked in, so we must explicitly animate to
+    // `opacity: 1` (not return `{}`) or the content stays invisible.
     const anim = (delay: number) =>
-        reducedMotion
-            ? {}
+        reduced_motion
+            ? { initial: false, animate: { opacity: 1, y: 0 } }
             : {
                   initial: { opacity: 0, y: 28 },
                   animate: { opacity: 1, y: 0 },
@@ -43,9 +47,12 @@ export default function Hero() {
                 </motion.p>
 
                 <motion.div className={s.ctas} {...anim(0.3)}>
-                    <a href="tel:+61461522409" className={s.ctaPrimary}>
+                    <a
+                        href={`tel:${businessData.phoneTel}`}
+                        className={s.ctaPrimary}
+                    >
                         <Phone size={18} />
-                        Call +61 461 522 409
+                        Call {businessData.phone}
                     </a>
                     <a href="#contact" className={s.ctaSecondary}>
                         Get a Free Quote

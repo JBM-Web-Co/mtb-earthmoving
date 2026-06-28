@@ -14,7 +14,7 @@ import { SectionHeader } from './UI';
 import { useScrollReveal } from '../hooks';
 import s from './Services.module.scss';
 
-const iconMap: Record<string, ReactNode> = {
+const icon_map: Record<string, ReactNode> = {
     mountain: <Mountain size={26} />,
     home: <Home size={26} />,
     route: <Route size={26} />,
@@ -26,8 +26,8 @@ const iconMap: Record<string, ReactNode> = {
 
 export default function Services() {
     const { ref, isVisible } = useScrollReveal();
-    const reducedMotion = useReducedMotion();
-    const lastIdx = businessData.services.length - 1;
+    const reduced_motion = useReducedMotion();
+    const last_idx = businessData.services.length - 1;
 
     return (
         <section id="services" className={s.services}>
@@ -46,11 +46,15 @@ export default function Services() {
                     {businessData.services.map((svc, i) => (
                         <motion.article
                             key={svc.title}
-                            className={`${s.card}${i === lastIdx ? ` ${s.cardLast}` : ''}`}
+                            className={`${s.card}${i === last_idx ? ` ${s.cardLast}` : ''}`}
                             initial={
-                                reducedMotion ? false : { opacity: 0, y: 28 }
+                                reduced_motion ? false : { opacity: 0, y: 28 }
                             }
-                            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                            animate={
+                                reduced_motion || isVisible
+                                    ? { opacity: 1, y: 0 }
+                                    : { opacity: 0, y: 28 }
+                            }
                             transition={{
                                 duration: 0.5,
                                 delay: i * 0.07,
@@ -62,7 +66,7 @@ export default function Services() {
                             </span>
                             <div className={s.cardBody}>
                                 <div className={s.iconWrap}>
-                                    {iconMap[svc.iconName]}
+                                    {icon_map[svc.iconName]}
                                 </div>
                                 <div className={s.cardContent}>
                                     <h3 className={s.cardTitle}>{svc.title}</h3>

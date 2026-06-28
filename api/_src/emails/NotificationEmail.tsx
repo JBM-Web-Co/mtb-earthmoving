@@ -10,7 +10,7 @@ import {
     Heading,
     Hr,
 } from 'react-email';
-import type { ContactSchema } from '../utils/contactSchema.js';
+import type { ContactSchema } from '../utils/contact-schema.js';
 
 const FONT_FAMILY =
     'ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif';

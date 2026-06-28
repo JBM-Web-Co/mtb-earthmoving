@@ -20,26 +20,6 @@
     --footer-border: rgba(255, 255, 255, 0.1);
 }
 
-[data-theme='dark'] {
-    --bg: #0f172a;
-    --surface: #1e293b;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
-    --text-light: #64748b;
-    --border: #334155;
-    --border-light: #475569;
-    --primary-light: rgba(55, 117, 190, 0.15);
-    --nav-bg: rgba(15, 23, 42, 0.92);
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.4);
-    --footer-bg: #020617;
-    --footer-text: #94a3b8;
-    --footer-heading: #f1f5f9;
-    --footer-muted: #64748b;
-    --footer-border: rgba(255, 255, 255, 0.06);
-}
-
 *,
 *::before,
 *::after {
@@ -63,9 +43,6 @@ body {
     background: $bg;
     line-height: 1.6;
     overflow-x: hidden;
-    transition:
-        color 0.3s,
-        background 0.3s;
 
     // Reserve space above the fixed StickyCTA bar on mobile
     @media (max-width: 767px) {
