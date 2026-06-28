@@ -20,13 +20,13 @@ export function Button({
     onClick,
     className = '',
 }: ButtonProps) {
-    const variantClass =
+    const variant_class =
         variant === 'secondary'
             ? s.secondary
             : variant === 'white'
               ? s.white
               : s.primary;
-    const cls = `${s.btn} ${variantClass} ${className}`.trim();
+    const cls = `${s.btn} ${variant_class} ${className}`.trim();
 
     if (href) {
         return (
@@ -108,38 +108,38 @@ export function FormField({
     options = [],
     autoComplete,
 }: FormFieldProps) {
-    const inputCls =
+    const input_cls =
         `${s.formInput} ${error ? s.formInputError : ''} ${type === 'textarea' ? s.formTextarea : ''} ${type === 'select' ? s.formSelect : ''}`.trim();
-    const inputId = `field-${name}`;
-    const errorId = `error-${name}`;
+    const input_id = `field-${name}`;
+    const error_id = `error-${name}`;
 
     return (
         <div className={s.formGroup}>
-            <label htmlFor={inputId} className={s.formLabel}>
+            <label htmlFor={input_id} className={s.formLabel}>
                 {label}
                 {required && ' *'}
             </label>
             {type === 'textarea' ? (
                 <textarea
-                    id={inputId}
+                    id={input_id}
                     name={name}
-                    className={inputCls}
+                    className={input_cls}
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
                     required={required}
-                    aria-describedby={error ? errorId : undefined}
+                    aria-describedby={error ? error_id : undefined}
                     aria-invalid={!!error}
                 />
             ) : type === 'select' ? (
                 <select
-                    id={inputId}
+                    id={input_id}
                     name={name}
-                    className={inputCls}
+                    className={input_cls}
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     required={required}
-                    aria-describedby={error ? errorId : undefined}
+                    aria-describedby={error ? error_id : undefined}
                     aria-invalid={!!error}
                 >
                     <option value="">Select a service...</option>
@@ -151,21 +151,21 @@ export function FormField({
                 </select>
             ) : (
                 <input
-                    id={inputId}
+                    id={input_id}
                     name={name}
                     type={type}
-                    className={inputCls}
+                    className={input_cls}
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     placeholder={placeholder}
                     required={required}
                     autoComplete={autoComplete}
-                    aria-describedby={error ? errorId : undefined}
+                    aria-describedby={error ? error_id : undefined}
                     aria-invalid={!!error}
                 />
             )}
             {error && (
-                <p id={errorId} className={s.formError} role="alert">
+                <p id={error_id} className={s.formError} role="alert">
                     {error}
                 </p>
             )}

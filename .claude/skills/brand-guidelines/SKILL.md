@@ -1,66 +1,101 @@
 ---
 name: brand-guidelines
-description: Apply when writing copy, generating UI, or making styling decisions — enforces the client's brand identity, tone, colours, and typography
+description: Apply when writing copy, generating UI, or making styling decisions — enforces MTB Earthmoving's brand identity, tone, colours, and typography
 ---
 
-# Brand Guidelines — UPDATE_ME (Client Name)
+# Brand Guidelines — MTB Earthmoving
 
-Apply these guidelines whenever writing copy, choosing colours, selecting fonts, or designing UI components for this client.
+Apply these guidelines whenever writing copy, choosing colours, selecting fonts,
+or designing UI components for this client. Tokens live in
+`src/styles/_variables.scss` and `src/styles/global.scss`; business facts live in
+`src/data.ts`.
 
 ---
 
 ## Business Overview
 
-- **Business name:** UPDATE_ME
-- **Industry / trade:** UPDATE_ME (e.g. Plumbing, Electrical, Landscaping)
-- **Location:** UPDATE_ME (e.g. Melbourne, VIC)
-- **Target audience:** UPDATE_ME (e.g. homeowners, property managers, small businesses)
-- **Unique selling point:** UPDATE_ME (e.g. same-day service, 20 years experience, fixed pricing)
+- **Business name:** MTB Earthmoving
+- **Industry / trade:** Rural earthmoving, road construction & civil works
+  (land clearing, site prep, drainage, dam construction, road maintenance,
+  welding & fabrication)
+- **Location:** Gunnedah, NSW — serving Gunnedah, Narrabri, Tamworth, Quirindi,
+  Boggabri, Coonabarabran, Manilla and the wider North West / New England NSW
+- **Target audience:** Rural property owners, farmers, and station managers, plus
+  residential and commercial clients across North West NSW
+- **Unique selling point:** Owner-operated and locally based — over a decade of
+  on-the-ground experience, the owner on every job, and free no-obligation quotes.
+  "The land is our office."
 
 ---
 
 ## Tone of Voice
 
-- **Overall tone:** UPDATE_ME (e.g. friendly and professional / no-nonsense and direct / warm and trustworthy)
-- **Do:** UPDATE_ME (e.g. use plain language, speak to pain points, be reassuring)
-- **Don't:** UPDATE_ME (e.g. use jargon, make unverifiable claims, sound corporate)
+- **Overall tone:** No-nonsense, down-to-earth, and trustworthy — speaks like a
+  capable local contractor, not a corporate brand. Confident and practical.
+- **Do:** Use plain, direct language; lead with local knowledge and reliability;
+  emphasise free quotes, owner-operator attention, and getting the job done right
+  the first time; lean into rural/land vocabulary ("the bush", "the terrain").
+- **Don't:** Use corporate jargon or buzzwords, make unverifiable claims, or
+  oversell. Avoid city-slick marketing language that won't land with rural clients.
 
-Copy should always be conversion-focused and speak to the needs of local Australian homeowners or businesses.
+Copy should be conversion-focused and speak to the practical needs of North West
+NSW property owners and businesses.
 
 ---
 
 ## Colours
 
-| Token name         | Hex       | Usage                        |
-|--------------------|-----------|------------------------------|
-| `--color-primary`  | UPDATE_ME | CTAs, headings, key accents  |
-| `--color-secondary`| UPDATE_ME | Supporting accents           |
-| `--color-neutral`  | UPDATE_ME | Backgrounds, dividers        |
-| `--color-text`     | UPDATE_ME | Body text                    |
-| `--color-text-inv` | UPDATE_ME | Text on dark backgrounds     |
+Defined in `src/styles/_variables.scss` (brand/status) and
+`src/styles/global.scss` `:root` (neutrals). There is a single light palette — no
+dark mode.
 
-> Update `src/styles/_variables.scss` to match.
+| Token              | Hex       | Usage                                |
+| ------------------ | --------- | ------------------------------------ |
+| `$primary`         | `#3775be` | CTAs, links, key accents (work-blue) |
+| `$primary-hover`   | `#2d64a8` | Hover state for primary              |
+| `$accent`          | `#eab308` | Highlight / "high-vis" gold accent   |
+| `$accent-hover`    | `#ca8a04` | Hover state for accent               |
+| `$success`         | `#16a34a` | Success / confirmation states        |
+| `$danger`          | `#dc2626` | Errors / validation                  |
+| `--text` / `$text` | `#1a1a1a` | Body and heading text                |
+| `--text-muted`     | `#4a4a4a` | Secondary text                       |
+| `--bg`             | `#ffffff` | Page background                      |
+| `--surface`        | `#f5f4f1` | Alternating section / card surfaces  |
+| `--footer-bg`      | `#1a1a1a` | Footer + dark CTA bands              |
+
+> Update `src/styles/_variables.scss` and `src/styles/global.scss` together to
+> re-skin. Never hardcode brand colours in component modules — use the tokens.
 
 ---
 
 ## Typography
 
-- **Heading font:** UPDATE_ME (e.g. Poppins)
-- **Body font:** UPDATE_ME (e.g. Inter)
-- **Font source:** UPDATE_ME (e.g. Google Fonts — already imported in `root.tsx`)
+- **Heading font:** Oswald (condensed, uppercase-friendly — strong, industrial feel)
+- **Body font:** Source Sans 3 (clean, highly legible)
+- **Font source:** Google Fonts — already imported in `src/root.tsx` with
+  `display=swap`. Headings are often uppercase with slight letter-spacing.
 
 ---
 
 ## Logo
 
-- **File:** `public/logo.UPDATE_ME` (replace with client logo)
-- **Usage:** Always on white or `--color-neutral` backgrounds unless a reverse variant is available
-- **Minimum clear space:** UPDATE_ME (e.g. 16px on all sides)
+- **Files:** `public/logo.png` (dark, for light backgrounds) and
+  `public/logo-white.png` (reverse, for dark backgrounds — header over hero, footer)
+- **Usage:** Use the white variant on the dark hero and footer; the dark variant
+  on white/`--surface` backgrounds (e.g. the scrolled header)
+- **Minimum clear space:** Keep at least the height of the "M" of clear space on
+  all sides
 
 ---
 
 ## Imagery
 
-- **Style:** UPDATE_ME (e.g. real job-site photography, no stock imagery)
-- **Hero image:** `public/hero.UPDATE_ME`
-- **Alt text tone:** Descriptive and keyword-rich (supports SEO)
+- **Style:** Real job-site photography — machinery, earthworks, roads, dams, and
+  rural NSW landscapes. No stock imagery.
+- **Hero image:** `public/hero.png` (full-bleed background; also the 1200×630
+  social-share / OG image)
+- **Gallery:** `public/work1.webp`–`work6.webp` — recent projects
+- **Alt text tone:** Descriptive and keyword-rich for SEO (e.g. "MTB Earthmoving
+  on the job"), never "image of" / "photo of". Decorative images use `alt=""`.
+- **Optimisation:** Compress before committing — WebP for photos, optimised PNG
+  for the hero and logos. Size to rendered dimensions to protect Core Web Vitals.

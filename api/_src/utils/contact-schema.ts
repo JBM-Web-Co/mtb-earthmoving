@@ -22,7 +22,14 @@ export const ContactSchema = z.object({
         .trim()
         .min(1, 'Phone is required')
         .max(40, 'Phone is too long'),
-    serviceSelect: z.enum(SERVICE_OPTIONS).optional(),
+    // The client sends '' when no service is chosen; treat that as "not provided"
+    // instead of rejecting the whole submission.
+    serviceSelect: z.preprocess(
+        (value) => (value === '' ? undefined : value),
+        z.enum(SERVICE_OPTIONS).optional()
+    ),
     message: z.string().trim().max(5000, 'Message is too long').optional(),
+    // Honeypot — real users never fill this. Accepted but checked server-side.
+    company: z.string().optional(),
 });
 export type ContactSchema = z.infer<typeof ContactSchema>;

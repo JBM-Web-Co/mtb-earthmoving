@@ -5,15 +5,15 @@ import { businessData } from '../data';
 import s from './Header.module.scss';
 
 export default function Header() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const [activeSection, setActiveSection] = useState('');
-    const reducedMotion = useReducedMotion();
+    const [menu_open, set_menu_open] = useState(false);
+    const [scrolled, set_scrolled] = useState(false);
+    const [active_section, set_active_section] = useState('');
+    const reduced_motion = useReducedMotion();
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        const on_scroll = () => set_scrolled(window.scrollY > 20);
+        window.addEventListener('scroll', on_scroll, { passive: true });
+        return () => window.removeEventListener('scroll', on_scroll);
     }, []);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function Header() {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
+                        set_active_section(entry.target.id);
                     }
                 });
             },
@@ -32,7 +32,7 @@ export default function Header() {
         return () => observer.disconnect();
     }, []);
 
-    const closeMenu = () => setMenuOpen(false);
+    const close_menu = () => set_menu_open(false);
 
     return (
         <header className={`${s.header} ${scrolled ? s.scrolled : ''}`}>
@@ -46,23 +46,25 @@ export default function Header() {
                         src={scrolled ? '/logo.png' : '/logo-white.png'}
                         alt="MTB Earthmoving"
                         className={s.logoImg}
+                        width={320}
+                        height={205}
                     />
                 </a>
 
                 <nav className={s.nav} aria-label="Main navigation">
                     {businessData.navItems.map((item) => {
-                        const sectionId = item.href.replace('#', '');
+                        const section_id = item.href.replace('#', '');
                         return (
                             <a
                                 key={item.href}
                                 href={item.href}
-                                className={`${s.link} ${activeSection === sectionId ? s.linkActive : ''}`}
+                                className={`${s.link} ${active_section === section_id ? s.linkActive : ''}`}
                             >
                                 {item.label}
                             </a>
                         );
                     })}
-                    <a href="tel:+61461522409" className={s.cta}>
+                    <a href={`tel:${businessData.phoneTel}`} className={s.cta}>
                         <Phone size={16} />
                         Call Now
                     </a>
@@ -70,19 +72,19 @@ export default function Header() {
 
                 <button
                     className={s.mobileMenuBtn}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                    aria-expanded={menuOpen}
+                    onClick={() => set_menu_open(!menu_open)}
+                    aria-label={menu_open ? 'Close menu' : 'Open menu'}
+                    aria-expanded={menu_open}
                 >
-                    {menuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {menu_open ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
 
             <AnimatePresence>
-                {menuOpen && (
+                {menu_open && (
                     <motion.div
                         className={s.mobileMenu}
-                        initial={reducedMotion ? false : { opacity: 0, y: -8 }}
+                        initial={reduced_motion ? false : { opacity: 0, y: -8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
@@ -92,18 +94,18 @@ export default function Header() {
                                 key={item.href}
                                 href={item.href}
                                 className={s.mobileNavLink}
-                                onClick={closeMenu}
+                                onClick={close_menu}
                             >
                                 {item.label}
                             </a>
                         ))}
                         <a
-                            href="tel:+61461522409"
+                            href={`tel:${businessData.phoneTel}`}
                             className={s.mobileNavCta}
-                            onClick={closeMenu}
+                            onClick={close_menu}
                         >
                             <Phone size={18} />
-                            Call +61 461 522 409
+                            Call {businessData.phone}
                         </a>
                     </motion.div>
                 )}

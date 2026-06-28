@@ -1,8 +1,8 @@
 import { NotificationEmail } from './emails/NotificationEmail.js';
-import { sendEmail } from './utils/sendEmail.js';
-import type { ContactSchema } from './utils/contactSchema.js';
+import { sendEmail } from './utils/send-email.js';
+import type { ContactSchema } from './utils/contact-schema.js';
 import * as logger from './utils/logger.js';
-import { HttpError } from './utils/HttpError.js';
+import { HttpError } from './utils/http-error.js';
 
 const FROM_EMAIL = process.env.FROM_EMAIL ?? '';
 const TO_EMAIL = process.env.TO_EMAIL ?? '';

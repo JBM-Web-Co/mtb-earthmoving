@@ -13,6 +13,8 @@ export default function Footer() {
                                 src="/logo-white.png"
                                 alt="MTB Earthmoving"
                                 className={s.logoImg}
+                                width={320}
+                                height={205}
                             />
                         </a>
                         <p className={s.tagline}>
@@ -20,7 +22,7 @@ export default function Footer() {
                         </p>
                         <p className={s.desc}>{businessData.description}</p>
                         <a
-                            href="https://www.facebook.com/profile.php?id=61563674456496"
+                            href={businessData.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={s.social}
@@ -58,7 +60,7 @@ export default function Footer() {
                         <div className={s.colTitle}>Contact</div>
                         <div className={s.contactItems}>
                             <a
-                                href="tel:+61461522409"
+                                href={`tel:${businessData.phoneTel}`}
                                 className={s.contactItem}
                             >
                                 <Phone size={16} className={s.contactIcon} />

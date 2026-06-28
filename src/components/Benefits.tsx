@@ -13,7 +13,7 @@ const POINTS = [
 
 export default function Benefits() {
     const { ref, isVisible } = useScrollReveal();
-    const reducedMotion = useReducedMotion();
+    const reduced_motion = useReducedMotion();
 
     return (
         <section id="about" className={s.benefits}>
@@ -26,8 +26,12 @@ export default function Benefits() {
                 <div ref={ref} className={s.layout}>
                     <motion.div
                         className={s.textCol}
-                        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                        initial={reduced_motion ? false : { opacity: 0, y: 20 }}
+                        animate={
+                            reduced_motion || isVisible
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 20 }
+                        }
                         transition={{ duration: 0.5 }}
                     >
                         <p className={s.body}>
@@ -60,14 +64,21 @@ export default function Benefits() {
 
                     <motion.div
                         className={s.imageCol}
-                        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-                        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                        initial={reduced_motion ? false : { opacity: 0, y: 20 }}
+                        animate={
+                            reduced_motion || isVisible
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 20 }
+                        }
                         transition={{ duration: 0.5, delay: 0.15 }}
                     >
                         <img
-                            src="/about-us.png"
+                            src="/about-us.webp"
                             alt="MTB Earthmoving on the job"
                             className={s.image}
+                            width={438}
+                            height={591}
+                            loading="lazy"
                         />
                     </motion.div>
                 </div>

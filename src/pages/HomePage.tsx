@@ -2,21 +2,21 @@ import type { MetaFunction } from 'react-router';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Benefits from '../components/Benefits';
-import SocialProof from '../components/SocialProof';
+import Gallery from '../components/Gallery';
 import Contact from '../components/Contact';
 import { businessData } from '../data';
 
-const CLIENT_URL = 'https://www.mtb-earthmoving.com';
+const TITLE = `${businessData.name} | ${businessData.tagline}`;
 
 const JSON_LD = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: businessData.name,
     description: businessData.description,
-    url: CLIENT_URL,
+    url: businessData.url,
     telephone: businessData.phone,
     email: businessData.email,
-    image: `${CLIENT_URL}/logo.png`,
+    image: `${businessData.url}/logo.png`,
     priceRange: '$$',
     address: {
         '@type': 'PostalAddress',
@@ -24,19 +24,21 @@ const JSON_LD = {
         addressLocality: businessData.city,
         addressRegion: businessData.state,
         postalCode: businessData.postcode,
-        addressCountry: 'AU',
+        addressCountry: businessData.country,
     },
     geo: {
         '@type': 'GeoCoordinates',
-        latitude: -30.9776,
-        longitude: 150.2576,
+        latitude: businessData.geo.latitude,
+        longitude: businessData.geo.longitude,
     },
-    openingHours: businessData.hours,
-    areaServed: businessData.areas.map((area) => ({
-        '@type': 'City',
-        name: area,
-    })),
-    sameAs: ['https://www.facebook.com/profile.php?id=61563674456496'],
+    openingHours: businessData.openingHours,
+    areaServed: businessData.areas
+        .filter((area) => area !== 'North West NSW')
+        .map((area) => ({
+            '@type': 'City',
+            name: area,
+        })),
+    sameAs: [businessData.facebookUrl],
     hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Earthmoving Services',
@@ -52,18 +54,15 @@ const JSON_LD = {
 };
 
 export const meta: MetaFunction = () => [
-    { title: `${businessData.name} | ${businessData.tagline}` },
+    { title: TITLE },
     { name: 'description', content: businessData.description },
-    {
-        property: 'og:title',
-        content: `${businessData.name} | ${businessData.tagline}`,
-    },
+    { property: 'og:title', content: TITLE },
     { property: 'og:description', content: businessData.description },
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: CLIENT_URL },
+    { property: 'og:url', content: businessData.url },
     { property: 'og:site_name', content: businessData.name },
-    { tagName: 'link', rel: 'canonical', href: CLIENT_URL },
-    { property: 'og:image', content: `${CLIENT_URL}/hero.png` },
+    { tagName: 'link', rel: 'canonical', href: businessData.url },
+    { property: 'og:image', content: `${businessData.url}/hero.png` },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
     {
@@ -71,12 +70,9 @@ export const meta: MetaFunction = () => [
         content: 'MTB Earthmoving — rural earthmoving in Gunnedah NSW',
     },
     { name: 'twitter:card', content: 'summary_large_image' },
-    {
-        name: 'twitter:title',
-        content: `${businessData.name} | ${businessData.tagline}`,
-    },
+    { name: 'twitter:title', content: TITLE },
     { name: 'twitter:description', content: businessData.description },
-    { name: 'twitter:image', content: `${CLIENT_URL}/hero.png` },
+    { name: 'twitter:image', content: `${businessData.url}/hero.png` },
     {
         name: 'twitter:image:alt',
         content: 'MTB Earthmoving — rural earthmoving in Gunnedah NSW',
@@ -90,7 +86,7 @@ export default function HomePage() {
             <Hero />
             <Benefits />
             <Services />
-            <SocialProof />
+            <Gallery />
             <Contact />
         </>
     );

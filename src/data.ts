@@ -9,17 +9,28 @@ type Service = {
     iconName: string;
 };
 
+type GeoCoordinates = {
+    latitude: number;
+    longitude: number;
+};
+
 export type BusinessData = {
     name: string;
     tagline: string;
     description: string;
+    url: string;
     phone: string;
+    phoneTel: string;
     email: string;
+    facebookUrl: string;
     address: string;
     city: string;
     state: string;
     postcode: string;
+    country: string;
     hours: string;
+    openingHours: string;
+    geo: GeoCoordinates;
     navItems: NavItem[];
     services: Service[];
     areas: string[];
@@ -30,13 +41,22 @@ export const businessData: BusinessData = {
     tagline: 'The land is our office.',
     description:
         'Professional rural earthmoving, road construction, and civil works across Gunnedah NSW and the North West. Owner-operated, locally based, built for the bush.',
+    url: 'https://www.mtb-earthmoving.com',
     phone: '+61 461 522 409',
+    phoneTel: '+61461522409',
     email: 'michealbrattan1994@yahoo.com',
+    facebookUrl: 'https://www.facebook.com/profile.php?id=61563674456496',
     address: '150 Little Barber St',
     city: 'Gunnedah',
     state: 'NSW',
     postcode: '2380',
+    country: 'AU',
     hours: 'Mon–Sat: 6am – 6pm',
+    openingHours: 'Mo-Sa 06:00-18:00',
+    geo: {
+        latitude: -30.9776,
+        longitude: 150.2576,
+    },
     navItems: [
         { label: 'About', href: '#about' },
         { label: 'Services', href: '#services' },

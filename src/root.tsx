@@ -2,12 +2,16 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import StickyCTA from './components/StickyCTA';
+import { businessData } from './data';
 import './styles/global.scss';
 import { Analytics } from '@vercel/analytics/react';
 
+const GEO_POSITION = `${businessData.geo.latitude};${businessData.geo.longitude}`;
+const GEO_ICBM = `${businessData.geo.latitude}, ${businessData.geo.longitude}`;
+
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en-AU">
             <head>
                 <meta charSet="UTF-8" />
                 <meta
@@ -18,9 +22,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <link rel="apple-touch-icon" href="/logo.png" />
                 <meta name="theme-color" content="#1a1a1a" />
                 <meta name="geo.region" content="AU-NSW" />
-                <meta name="geo.placename" content="Gunnedah" />
-                <meta name="geo.position" content="-30.9776;150.2576" />
-                <meta name="ICBM" content="-30.9776, 150.2576" />
+                <meta name="geo.placename" content={businessData.city} />
+                <meta name="geo.position" content={GEO_POSITION} />
+                <meta name="ICBM" content={GEO_ICBM} />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
                     rel="preconnect"
